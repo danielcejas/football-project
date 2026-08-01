@@ -12,9 +12,22 @@ from src.scraping.base import RateLimitedSession
 from src.scraping.transfermarkt.client import fetch_league_clubs, fetch_squad
 
 
+def _valued_at_for_season(season: str) -> str:
+    """Transfermarkt SI muestra un valor de mercado distinto en la pagina de plantilla de
+    una temporada pasada (verificado manualmente: un jugador con 28M en la pagina de
+    2023/24 vs 15M en la actual), pero no expone la fecha exacta de esa valoracion. Se usa
+    el 30 de junio del año siguiente (fin de temporada europea tipico) como fecha
+    representativa de la temporada -- salvo que caiga en el futuro (temporada en curso),
+    en cuyo caso se usa la fecha de scraping real, igual que antes. Esto evita que una
+    temporada historica quede fechada con el dia de hoy y se confunda con la vigente."""
+    season_end = datetime.date(int(season) + 1, 6, 30)
+    today = datetime.date.today()
+    return min(season_end, today).isoformat()
+
+
 def run(league_slug: str = "laliga", competition_code: str = "ES1", season: str = "2025") -> None:
     session = RateLimitedSession(min_interval_seconds=2.0)
-    valued_at = datetime.date.today().isoformat()
+    valued_at = _valued_at_for_season(season)
 
     _, clubs = fetch_league_clubs(session, league_slug, competition_code, season)
     print(f"Encontrados {len(clubs)} clubes")
