@@ -1,6 +1,6 @@
 import pytest
 
-from src.analytics.ranking import club_elo_update, expected_score, player_elo_update
+from src.analytics.ranking import club_elo_update, expected_score, player_elo_update, seed_rating
 
 
 def test_expected_score_equal_ratings_no_adjustment():
@@ -79,3 +79,24 @@ def test_player_elo_zero_minutes_has_no_team_component():
         goal_contribution=0, expected_goal_contribution=0,
     )
     assert delta == pytest.approx(0.0)
+
+
+def test_seed_rating_at_base_rating_stays_unchanged():
+    assert seed_rating(1500, base_rating=1500) == pytest.approx(1500)
+
+
+def test_seed_rating_pulls_high_rating_toward_base():
+    # 1500 + 0.75 * (1700 - 1500) = 1650: por encima de la media, pero no tanto como antes
+    assert seed_rating(1700, base_rating=1500, regression_factor=0.75) == pytest.approx(1650)
+
+
+def test_seed_rating_pulls_low_rating_toward_base():
+    assert seed_rating(1300, base_rating=1500, regression_factor=0.75) == pytest.approx(1350)
+
+
+def test_seed_rating_factor_one_means_no_regression():
+    assert seed_rating(1700, base_rating=1500, regression_factor=1.0) == pytest.approx(1700)
+
+
+def test_seed_rating_factor_zero_means_full_reset():
+    assert seed_rating(1700, base_rating=1500, regression_factor=0.0) == pytest.approx(1500)

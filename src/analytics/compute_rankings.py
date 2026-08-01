@@ -1,9 +1,15 @@
 """Recorre core.matches en orden cronológico aplicando el Elo de clubes y jugadores,
 y vuelca el historial en marts.club_elo_history / marts.player_elo_history.
 
-Se recalcula desde cero cada vez (trunca el historial de marts y reprocesa todos los
-partidos de la competición/temporada): con el volumen de una sola temporada esto es
+Se recalcula desde cero cada vez (borra el historial de marts de ESTA competición/
+temporada y reprocesa todos sus partidos): con el volumen de una temporada esto es
 barato, y evita tener que gestionar reanudación incremental en esta primera iteración.
+
+IMPORTANTE: el Elo es continuo entre temporadas (no se resetea a 1500 cada vez), así que
+las temporadas de una misma competición deben procesarse en orden cronológico (la más
+antigua primero) para que cada una pueda heredar el rating final de la anterior. Procesar
+fuera de orden no falla, pero deja el Elo de una temporada más reciente sembrado con datos
+de una temporada posterior (o sin sembrar, si la anterior no se ha calculado todavía).
 """
 
 import sys
@@ -11,10 +17,30 @@ from collections import defaultdict
 
 from sqlalchemy import text
 
-from src.analytics.ranking import club_elo_update, expected_score, player_elo_update
+from src.analytics.ranking import club_elo_update, expected_score, player_elo_update, seed_rating
 from src.db.connection import get_engine
 
 INITIAL_RATING = 1500.0
+
+
+def _load_previous_ratings(conn, competition: str, season_start, history_table: str, entity_column: str) -> dict[int, float]:
+    """Último `elo_after` conocido de cada entidad (club o jugador) antes de que empiece
+    esta temporada, para sembrar el rating inicial en vez de arrancar siempre en 1500."""
+    rows = conn.execute(
+        text(
+            f"""
+            SELECT DISTINCT ON (h.{entity_column}) h.{entity_column} AS entity_id, h.elo_after
+            FROM marts.{history_table} h
+            JOIN core.matches m ON m.id = h.match_id
+            WHERE m.competition = :competition AND m.match_date < :season_start
+            ORDER BY h.{entity_column}, m.match_date DESC, h.id DESC
+            """
+        ),
+        {"competition": competition, "season_start": season_start},
+    ).fetchall()
+    # elo_after es NUMERIC en Postgres -> psycopg2 lo trae como Decimal; seed_rating hace
+    # aritmetica con floats (base_rating/regression_factor), así que hay que castear aquí.
+    return {row.entity_id: float(row.elo_after) for row in rows}
 
 
 def compute_and_store(competition: str, season: str) -> None:
@@ -45,8 +71,17 @@ def compute_and_store(competition: str, season: str) -> None:
         for row in rows:
             player_stats_by_match[row.match_id].append(row)
 
+        previous_club_ratings: dict[int, float] = {}
+        previous_player_ratings: dict[int, float] = {}
+        if matches:
+            season_start = matches[0].match_date
+            previous_club_ratings = _load_previous_ratings(conn, competition, season_start, "club_elo_history", "team_id")
+            previous_player_ratings = _load_previous_ratings(conn, competition, season_start, "player_elo_history", "player_id")
+
     club_ratings: dict[int, float] = defaultdict(lambda: INITIAL_RATING)
+    club_ratings.update({team_id: seed_rating(rating) for team_id, rating in previous_club_ratings.items()})
     player_ratings: dict[int, float] = defaultdict(lambda: INITIAL_RATING)
+    player_ratings.update({player_id: seed_rating(rating) for player_id, rating in previous_player_ratings.items()})
 
     club_history_rows = []
     player_history_rows = []
