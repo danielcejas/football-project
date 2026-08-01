@@ -18,6 +18,10 @@ AQUA = "#1baf7a"
 RED = "#e34948"
 NEUTRAL_GRAY = "#c3c2b7"
 
+# marts.player_valuation/player_similarity/team_similarity ya guardan varias temporadas;
+# el dashboard muestra solo la vigente hasta que se construya un selector de temporada.
+CURRENT_SEASON = "2025"
+
 st.set_page_config(page_title="Football Analytics — La Liga", layout="centered")
 
 
@@ -51,8 +55,9 @@ def load_player_valuation() -> pd.DataFrame:
                pv.predicted_value_eur, pv.value_gap_eur, pv.value_gap_pct
         FROM marts.player_valuation pv
         JOIN core.players p ON p.id = pv.player_id
+        WHERE pv.season = :season
     """
-    return pd.read_sql(query, get_engine())
+    return pd.read_sql(text(query), get_engine(), params={"season": CURRENT_SEASON})
 
 
 @st.cache_data(ttl=600)
@@ -61,9 +66,10 @@ def load_similarity_options() -> pd.DataFrame:
         SELECT DISTINCT p.id, p.canonical_name AS player
         FROM marts.player_similarity ps
         JOIN core.players p ON p.id = ps.player_id
+        WHERE ps.season = :season
         ORDER BY player
     """
-    return pd.read_sql(query, get_engine())
+    return pd.read_sql(text(query), get_engine(), params={"season": CURRENT_SEASON})
 
 
 @st.cache_data(ttl=600)
@@ -72,10 +78,10 @@ def load_similar_players(player_id: int) -> pd.DataFrame:
         SELECT p2.canonical_name AS similar_player, p2.position, ps.similarity
         FROM marts.player_similarity ps
         JOIN core.players p2 ON p2.id = ps.similar_player_id
-        WHERE ps.player_id = :player_id
+        WHERE ps.player_id = :player_id AND ps.season = :season
         ORDER BY ps.rank
     """
-    return pd.read_sql(text(query), get_engine(), params={"player_id": player_id})
+    return pd.read_sql(text(query), get_engine(), params={"player_id": player_id, "season": CURRENT_SEASON})
 
 
 @st.cache_data(ttl=600)
@@ -135,10 +141,11 @@ def load_young_talents(limit: int = 15) -> pd.DataFrame:
                yt.predicted_value_eur, yt.value_gap_pct
         FROM marts.young_talents yt
         JOIN core.players p ON p.id = yt.player_id
+        WHERE yt.season = :season
         ORDER BY yt.value_gap_pct DESC
         LIMIT {limit}
     """
-    return pd.read_sql(query, get_engine())
+    return pd.read_sql(text(query), get_engine(), params={"season": CURRENT_SEASON})
 
 
 @st.cache_data(ttl=600)
@@ -147,9 +154,10 @@ def load_team_style_options() -> pd.DataFrame:
         SELECT DISTINCT t.id, t.canonical_name AS team
         FROM marts.team_similarity ts
         JOIN core.teams t ON t.id = ts.team_id
+        WHERE ts.season = :season
         ORDER BY team
     """
-    return pd.read_sql(query, get_engine())
+    return pd.read_sql(text(query), get_engine(), params={"season": CURRENT_SEASON})
 
 
 @st.cache_data(ttl=600)
@@ -158,10 +166,10 @@ def load_similar_teams(team_id: int) -> pd.DataFrame:
         SELECT t2.canonical_name AS similar_team, ts.similarity
         FROM marts.team_similarity ts
         JOIN core.teams t2 ON t2.id = ts.similar_team_id
-        WHERE ts.team_id = :team_id
+        WHERE ts.team_id = :team_id AND ts.season = :season
         ORDER BY ts.rank
     """
-    return pd.read_sql(text(query), get_engine(), params={"team_id": team_id})
+    return pd.read_sql(text(query), get_engine(), params={"team_id": team_id, "season": CURRENT_SEASON})
 
 
 def ranking_chart(
