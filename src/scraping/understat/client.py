@@ -69,6 +69,22 @@ def fetch_players_stats(session: RateLimitedSession, competition: str, season: s
     return raw_id, payload
 
 
+def has_player_data(player_id: str) -> bool:
+    """True si ya existe una respuesta guardada de getPlayerData para este jugador.
+
+    fetch_player_data trae la carrera COMPLETA del jugador sin importar la temporada
+    pedida, así que si ya se descargó una vez (en cualquier temporada anterior) no hace
+    falta volver a pedirla al scrapear otra temporada distinta."""
+    url = f"{BASE_URL}/getPlayerData/{player_id}"
+    engine = get_engine()
+    with engine.connect() as conn:
+        row = conn.execute(
+            text("SELECT 1 FROM raw.understat_responses WHERE endpoint = 'player_data' AND url = :url LIMIT 1"),
+            {"url": url},
+        ).first()
+    return row is not None
+
+
 def fetch_player_data(session: RateLimitedSession, player_id: str, competition: str, season: str) -> tuple[int, dict]:
     url = f"{BASE_URL}/getPlayerData/{player_id}"
     response = session.get(

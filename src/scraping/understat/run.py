@@ -8,7 +8,7 @@ import sys
 
 from src.etl.clean_understat import load_player_matches, load_players_season
 from src.scraping.base import RateLimitedSession
-from src.scraping.understat.client import fetch_player_data, fetch_players_stats
+from src.scraping.understat.client import fetch_player_data, fetch_players_stats, has_player_data
 
 
 def run(competition: str = "La_liga", season: str = "2025", limit: int | None = None) -> None:
@@ -22,14 +22,20 @@ def run(competition: str = "La_liga", season: str = "2025", limit: int | None = 
     if limit is not None:
         players = players[:limit]
     total_matches = 0
+    skipped = 0
     for i, player in enumerate(players, start=1):
         player_id = player["id"]
+        if has_player_data(player_id):
+            skipped += 1
+            print(f"[{i}/{len(players)}] player {player_id} ({player['player_name']}): ya descargado, se salta")
+            continue
         raw_id, player_payload = fetch_player_data(session, player_id, competition, season)
         n_matches = load_player_matches(raw_id, player_payload, player_id)
         total_matches += n_matches
         print(f"[{i}/{len(players)}] player {player_id} ({player['player_name']}): {n_matches} partidos")
 
     print(f"Total filas en staging.understat_player_matches insertadas/actualizadas: {total_matches}")
+    print(f"Jugadores saltados por ya tener datos de su carrera: {skipped}")
 
 
 if __name__ == "__main__":
