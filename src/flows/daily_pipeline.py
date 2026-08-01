@@ -49,8 +49,8 @@ def compute_valuation(competition: str, season: str) -> None:
 
 
 @task(retries=1)
-def compute_similarity(competition: str, season: str) -> None:
-    _compute_similarity(competition, season)
+def compute_similarity(competition: str) -> None:
+    _compute_similarity(competition)
 
 
 @task(retries=1)
@@ -79,7 +79,7 @@ def daily_pipeline(
     # independientes entre sí pero todas dependen del build_core de arriba
     compute_rankings(competition_underscore, season)
     compute_valuation(competition_underscore, season)
-    compute_similarity(competition_underscore, season)
+    compute_similarity(competition_underscore)
     compute_team_style(competition_underscore, season)
 
 
