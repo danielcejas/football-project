@@ -62,26 +62,29 @@ def load_player_valuation() -> pd.DataFrame:
 
 @st.cache_data(ttl=600)
 def load_similarity_options() -> pd.DataFrame:
+    """Una fila por jugador-temporada disponible en marts.player_similarity (las 3
+    temporadas), para elegir la referencia del buscador de parecidos."""
     query = """
-        SELECT DISTINCT p.id, p.canonical_name AS player
+        SELECT DISTINCT p.id, p.canonical_name AS player, ps.season
         FROM marts.player_similarity ps
         JOIN core.players p ON p.id = ps.player_id
-        WHERE ps.season = :season
-        ORDER BY player
+        ORDER BY player, ps.season DESC
     """
-    return pd.read_sql(text(query), get_engine(), params={"season": CURRENT_SEASON})
+    df = pd.read_sql(query, get_engine())
+    df["label"] = df["player"] + " (" + df["season"] + ")"
+    return df
 
 
 @st.cache_data(ttl=600)
-def load_similar_players(player_id: int) -> pd.DataFrame:
+def load_similar_players(player_id: int, season: str) -> pd.DataFrame:
     query = """
-        SELECT p2.canonical_name AS similar_player, p2.position, ps.similarity
+        SELECT p2.canonical_name AS similar_player, p2.position, ps.similar_season, ps.similarity
         FROM marts.player_similarity ps
         JOIN core.players p2 ON p2.id = ps.similar_player_id
         WHERE ps.player_id = :player_id AND ps.season = :season
         ORDER BY ps.rank
     """
-    return pd.read_sql(text(query), get_engine(), params={"player_id": player_id, "season": CURRENT_SEASON})
+    return pd.read_sql(text(query), get_engine(), params={"player_id": player_id, "season": season})
 
 
 @st.cache_data(ttl=600)
@@ -150,26 +153,29 @@ def load_young_talents(limit: int = 15) -> pd.DataFrame:
 
 @st.cache_data(ttl=600)
 def load_team_style_options() -> pd.DataFrame:
+    """Una fila por equipo-temporada disponible en marts.team_similarity (las 3
+    temporadas), para elegir la referencia del buscador de estilos parecidos."""
     query = """
-        SELECT DISTINCT t.id, t.canonical_name AS team
+        SELECT DISTINCT t.id, t.canonical_name AS team, ts.season
         FROM marts.team_similarity ts
         JOIN core.teams t ON t.id = ts.team_id
-        WHERE ts.season = :season
-        ORDER BY team
+        ORDER BY team, ts.season DESC
     """
-    return pd.read_sql(text(query), get_engine(), params={"season": CURRENT_SEASON})
+    df = pd.read_sql(query, get_engine())
+    df["label"] = df["team"] + " (" + df["season"] + ")"
+    return df
 
 
 @st.cache_data(ttl=600)
-def load_similar_teams(team_id: int) -> pd.DataFrame:
+def load_similar_teams(team_id: int, season: str) -> pd.DataFrame:
     query = """
-        SELECT t2.canonical_name AS similar_team, ts.similarity
+        SELECT t2.canonical_name AS similar_team, ts.similar_season, ts.similarity
         FROM marts.team_similarity ts
         JOIN core.teams t2 ON t2.id = ts.similar_team_id
         WHERE ts.team_id = :team_id AND ts.season = :season
         ORDER BY ts.rank
     """
-    return pd.read_sql(text(query), get_engine(), params={"team_id": team_id, "season": CURRENT_SEASON})
+    return pd.read_sql(text(query), get_engine(), params={"team_id": team_id, "season": season})
 
 
 def ranking_chart(
@@ -294,20 +300,23 @@ st.header("Jugadores parecidos")
 st.caption(
     "Similitud coseno sobre el perfil de producción por 90' (goles, asistencias, xG, xA, "
     "tiros, pases clave), estandarizado — compara estilo de producción, no volumen total. "
-    "Limitado a F/M por la misma razón que la valoración: sin stats defensivas, un "
-    "'parecido' entre defensas o porteros no sería real."
+    "Busca entre las 3 temporadas: un jugador puede salir parecido a sí mismo en otra "
+    "temporada (muestra su evolución) o a otro jugador de cualquier año. Limitado a F/M "
+    "por la misma razón que la valoración: sin stats defensivas, un 'parecido' entre "
+    "defensas o porteros no sería real."
 )
 similarity_options = load_similarity_options()
-selected_name = st.selectbox("Elige un jugador", similarity_options["player"])
-selected_id = int(similarity_options.loc[similarity_options["player"] == selected_name, "id"].iloc[0])
-similar_df = load_similar_players(selected_id)
+selected_label = st.selectbox("Elige un jugador y temporada", similarity_options["label"])
+selected_row = similarity_options.loc[similarity_options["label"] == selected_label].iloc[0]
+similar_df = load_similar_players(int(selected_row["id"]), selected_row["season"])
 st.dataframe(
-    similar_df[["similar_player", "position", "similarity"]],
+    similar_df[["similar_player", "position", "similar_season", "similarity"]],
     use_container_width=True,
     hide_index=True,
     column_config={
         "similar_player": st.column_config.TextColumn("Jugador parecido"),
         "position": st.column_config.TextColumn("Posición"),
+        "similar_season": st.column_config.TextColumn("Temporada"),
         "similarity": st.column_config.NumberColumn("Similitud", format="%.3f"),
     },
 )
@@ -316,18 +325,21 @@ st.header("Equipos que juegan parecido")
 st.caption(
     "Similitud coseno sobre el perfil de estilo por partido (xG/xGA a favor y en contra, "
     "ppda —presión, más bajo es más agresiva— y deep —pases cerca del área rival, proxy "
-    "de verticalidad—), estandarizado y promediado en la temporada."
+    "de verticalidad—), estandarizado y promediado en la temporada. Busca entre las 3 "
+    "temporadas: un equipo puede salir parecido a sí mismo en otro año (identidad de "
+    "juego que se mantiene) o a otro equipo de cualquier temporada."
 )
 team_style_options = load_team_style_options()
-selected_team_name = st.selectbox("Elige un equipo", team_style_options["team"])
-selected_team_id = int(team_style_options.loc[team_style_options["team"] == selected_team_name, "id"].iloc[0])
-similar_teams_df = load_similar_teams(selected_team_id)
+selected_team_label = st.selectbox("Elige un equipo y temporada", team_style_options["label"])
+selected_team_row = team_style_options.loc[team_style_options["label"] == selected_team_label].iloc[0]
+similar_teams_df = load_similar_teams(int(selected_team_row["id"]), selected_team_row["season"])
 st.dataframe(
-    similar_teams_df,
+    similar_teams_df[["similar_team", "similar_season", "similarity"]],
     use_container_width=True,
     hide_index=True,
     column_config={
         "similar_team": st.column_config.TextColumn("Equipo parecido"),
+        "similar_season": st.column_config.TextColumn("Temporada"),
         "similarity": st.column_config.NumberColumn("Similitud", format="%.3f"),
     },
 )
