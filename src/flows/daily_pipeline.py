@@ -54,8 +54,8 @@ def compute_similarity(competition: str) -> None:
 
 
 @task(retries=1)
-def compute_team_style(competition: str, season: str) -> None:
-    _compute_team_style(competition, season)
+def compute_team_style(competition: str) -> None:
+    _compute_team_style(competition)
 
 
 @flow(name="football-daily-pipeline", log_prints=True)
@@ -80,7 +80,7 @@ def daily_pipeline(
     compute_rankings(competition_underscore, season)
     compute_valuation(competition_underscore, season)
     compute_similarity(competition_underscore)
-    compute_team_style(competition_underscore, season)
+    compute_team_style(competition_underscore)
 
 
 if __name__ == "__main__":
