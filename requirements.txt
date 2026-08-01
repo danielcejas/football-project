@@ -1,0 +1,12 @@
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.0
+psycopg2-binary>=2.9
+sqlalchemy>=2.0
+pandas>=2.2
+prefect>=2.19
+python-dotenv>=1.0
+pytest>=8.0
+streamlit>=1.38
+altair>=5.3
+scikit-learn>=1.4

@@ -1,0 +1,383 @@
+"""Dashboard mínimo: rankings Elo de clubes y jugadores de La Liga 2025/2026,
+calculados en src/analytics/compute_rankings.py y guardados en marts.*"""
+
+import sys
+from pathlib import Path
+
+import altair as alt
+import pandas as pd
+import streamlit as st
+from sqlalchemy import text
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from src.db.connection import get_engine
+
+BLUE = "#2a78d6"
+AQUA = "#1baf7a"
+RED = "#e34948"
+NEUTRAL_GRAY = "#c3c2b7"
+
+st.set_page_config(page_title="Football Analytics — La Liga", layout="centered")
+
+
+@st.cache_data(ttl=600)
+def load_club_rankings() -> pd.DataFrame:
+    query = """
+        SELECT t.canonical_name AS team, cr.elo_rating, cr.match_date
+        FROM marts.club_rankings cr
+        JOIN core.teams t ON t.id = cr.team_id
+        ORDER BY cr.elo_rating DESC
+    """
+    return pd.read_sql(query, get_engine())
+
+
+@st.cache_data(ttl=600)
+def load_player_rankings(limit: int = 20) -> pd.DataFrame:
+    query = f"""
+        SELECT p.canonical_name AS player, pr.elo_rating, pr.match_date
+        FROM marts.player_rankings pr
+        JOIN core.players p ON p.id = pr.player_id
+        ORDER BY pr.elo_rating DESC
+        LIMIT {limit}
+    """
+    return pd.read_sql(query, get_engine())
+
+
+@st.cache_data(ttl=600)
+def load_player_valuation() -> pd.DataFrame:
+    query = """
+        SELECT p.canonical_name AS player, p.position, pv.market_value_eur,
+               pv.predicted_value_eur, pv.value_gap_eur, pv.value_gap_pct
+        FROM marts.player_valuation pv
+        JOIN core.players p ON p.id = pv.player_id
+    """
+    return pd.read_sql(query, get_engine())
+
+
+@st.cache_data(ttl=600)
+def load_similarity_options() -> pd.DataFrame:
+    query = """
+        SELECT DISTINCT p.id, p.canonical_name AS player
+        FROM marts.player_similarity ps
+        JOIN core.players p ON p.id = ps.player_id
+        ORDER BY player
+    """
+    return pd.read_sql(query, get_engine())
+
+
+@st.cache_data(ttl=600)
+def load_similar_players(player_id: int) -> pd.DataFrame:
+    query = """
+        SELECT p2.canonical_name AS similar_player, p2.position, ps.similarity
+        FROM marts.player_similarity ps
+        JOIN core.players p2 ON p2.id = ps.similar_player_id
+        WHERE ps.player_id = :player_id
+        ORDER BY ps.rank
+    """
+    return pd.read_sql(text(query), get_engine(), params={"player_id": player_id})
+
+
+@st.cache_data(ttl=600)
+def load_club_form(limit: int = 20) -> pd.DataFrame:
+    query = f"""
+        SELECT t.canonical_name AS team, cf.form_score, cf.matches_considered
+        FROM marts.club_form cf
+        JOIN core.teams t ON t.id = cf.team_id
+        ORDER BY cf.form_score DESC
+        LIMIT {limit}
+    """
+    return pd.read_sql(query, get_engine())
+
+
+@st.cache_data(ttl=600)
+def load_player_form(limit: int = 20) -> pd.DataFrame:
+    query = f"""
+        SELECT p.canonical_name AS player, pf.form_score, pf.matches_considered
+        FROM marts.player_form pf
+        JOIN core.players p ON p.id = pf.player_id
+        ORDER BY pf.form_score DESC
+        LIMIT {limit}
+    """
+    return pd.read_sql(query, get_engine())
+
+
+@st.cache_data(ttl=600)
+def load_club_week_best(limit: int = 10) -> pd.DataFrame:
+    # las vistas de marts.* ya vienen ordenadas, pero ese orden no se conserva al pasar
+    # por otro JOIN sin repetir el ORDER BY explícitamente en esta consulta
+    query = f"""
+        SELECT t.canonical_name AS team, cwb.match_date, cwb.delta
+        FROM marts.club_week_best cwb
+        JOIN core.teams t ON t.id = cwb.team_id
+        ORDER BY cwb.delta DESC
+        LIMIT {limit}
+    """
+    return pd.read_sql(query, get_engine())
+
+
+@st.cache_data(ttl=600)
+def load_player_week_best(limit: int = 10) -> pd.DataFrame:
+    query = f"""
+        SELECT p.canonical_name AS player, pwb.match_date, pwb.delta
+        FROM marts.player_week_best pwb
+        JOIN core.players p ON p.id = pwb.player_id
+        ORDER BY pwb.delta DESC
+        LIMIT {limit}
+    """
+    return pd.read_sql(query, get_engine())
+
+
+@st.cache_data(ttl=600)
+def load_young_talents(limit: int = 15) -> pd.DataFrame:
+    query = f"""
+        SELECT p.canonical_name AS player, yt.age, yt.market_value_eur,
+               yt.predicted_value_eur, yt.value_gap_pct
+        FROM marts.young_talents yt
+        JOIN core.players p ON p.id = yt.player_id
+        ORDER BY yt.value_gap_pct DESC
+        LIMIT {limit}
+    """
+    return pd.read_sql(query, get_engine())
+
+
+@st.cache_data(ttl=600)
+def load_team_style_options() -> pd.DataFrame:
+    query = """
+        SELECT DISTINCT t.id, t.canonical_name AS team
+        FROM marts.team_similarity ts
+        JOIN core.teams t ON t.id = ts.team_id
+        ORDER BY team
+    """
+    return pd.read_sql(query, get_engine())
+
+
+@st.cache_data(ttl=600)
+def load_similar_teams(team_id: int) -> pd.DataFrame:
+    query = """
+        SELECT t2.canonical_name AS similar_team, ts.similarity
+        FROM marts.team_similarity ts
+        JOIN core.teams t2 ON t2.id = ts.similar_team_id
+        WHERE ts.team_id = :team_id
+        ORDER BY ts.rank
+    """
+    return pd.read_sql(text(query), get_engine(), params={"team_id": team_id})
+
+
+def ranking_chart(
+    df: pd.DataFrame, category_col: str, color: str, height: int, value_col: str = "elo_rating", x_title: str = "Rating Elo"
+) -> alt.Chart:
+    return (
+        alt.Chart(df)
+        .mark_bar(cornerRadiusEnd=4, color=color)
+        .encode(
+            x=alt.X(f"{value_col}:Q", title=x_title),
+            y=alt.Y(f"{category_col}:N", sort="-x", title=None),
+            tooltip=[
+                alt.Tooltip(f"{category_col}:N", title=category_col.title()),
+                alt.Tooltip(f"{value_col}:Q", title=x_title, format=".1f"),
+            ],
+        )
+        .properties(height=height)
+    )
+
+
+def valuation_chart(df: pd.DataFrame) -> alt.Chart:
+    axis_min = min(df["market_value_eur"].min(), df["predicted_value_eur"].min()) * 0.8
+    axis_max = max(df["market_value_eur"].max(), df["predicted_value_eur"].max()) * 1.2
+    log_scale = alt.Scale(type="log", domain=[axis_min, axis_max])
+
+    reference_line = (
+        alt.Chart(pd.DataFrame({"x": [axis_min, axis_max]}))
+        .mark_line(strokeDash=[4, 4], color=NEUTRAL_GRAY)
+        .encode(x=alt.X("x:Q", scale=log_scale), y=alt.Y("x:Q", scale=log_scale))
+    )
+
+    points = (
+        alt.Chart(df)
+        .mark_circle(size=70, opacity=0.8)
+        .encode(
+            x=alt.X("market_value_eur:Q", title="Valor de mercado (€)", scale=log_scale),
+            y=alt.Y("predicted_value_eur:Q", title="Valor predicho por rendimiento (€)", scale=log_scale),
+            color=alt.Color(
+                "value_gap_pct:Q",
+                title="Gap (%)",
+                # dominio simétrico fijo y recortado: un par de casos extremos (jugadores
+                # con valor de mercado casi cero) no deben estirar la escala para todos
+                scale=alt.Scale(domain=[-100, 0, 100], range=[RED, NEUTRAL_GRAY, BLUE], clamp=True),
+            ),
+            tooltip=[
+                alt.Tooltip("player:N", title="Jugador"),
+                alt.Tooltip("market_value_eur:Q", title="Valor mercado", format=",.0f"),
+                alt.Tooltip("predicted_value_eur:Q", title="Valor predicho", format=",.0f"),
+                alt.Tooltip("value_gap_pct:Q", title="Gap %", format=".0f"),
+            ],
+        )
+    )
+    return (reference_line + points).properties(height=450)
+
+
+st.title("⚽ Football Analytics — La Liga 2025/2026")
+st.caption(
+    "Rating Elo propio (no oficial): sube o baja tras cada partido según el resultado, "
+    "el rival y, para jugadores, su rendimiento individual. Datos: Understat + Transfermarkt."
+)
+
+club_df = load_club_rankings()
+player_df = load_player_rankings()
+
+st.header("Ranking de clubes")
+st.altair_chart(ranking_chart(club_df, "team", BLUE, height=24 * len(club_df)), use_container_width=True)
+with st.expander("Ver tabla"):
+    st.dataframe(
+        club_df.assign(elo_rating=club_df["elo_rating"].round(1)),
+        use_container_width=True,
+        hide_index=True,
+    )
+
+st.header("Ranking de jugadores (top 20)")
+st.altair_chart(ranking_chart(player_df, "player", AQUA, height=24 * len(player_df)), use_container_width=True)
+with st.expander("Ver tabla"):
+    st.dataframe(
+        player_df.assign(elo_rating=player_df["elo_rating"].round(1)),
+        use_container_width=True,
+        hide_index=True,
+    )
+
+st.header("Valoración Moneyball (delanteros y centrocampistas)")
+st.caption(
+    "Compara el valor de mercado real con el que 'predice' un modelo que sólo mira goles, "
+    "asistencias, xG, xA, pases clave, edad y posición de esta temporada. Azul = el modelo "
+    "cree que debería valer más de lo que vale (posible ganga); rojo = el mercado paga más "
+    "de lo que el rendimiento de esta temporada sugiere. Limitado a F/M porque Understat no "
+    "da métricas defensivas, y no ve reputación, trayectoria ni potencial — que las grandes "
+    "estrellas salgan en rojo es esperable, no un error del modelo."
+)
+valuation_df = load_player_valuation()
+st.altair_chart(valuation_chart(valuation_df), use_container_width=True)
+
+VALUATION_COLUMN_CONFIG = {
+    "player": st.column_config.TextColumn("Jugador"),
+    "market_value_eur": st.column_config.NumberColumn("Valor mercado (€)", format="compact"),
+    "predicted_value_eur": st.column_config.NumberColumn("Valor predicho (€)", format="compact"),
+    "value_gap_pct": st.column_config.NumberColumn("Gap", format="%.0f%%"),
+}
+VALUATION_DISPLAY_COLS = ["player", "market_value_eur", "predicted_value_eur", "value_gap_pct"]
+
+col1, col2 = st.columns(2)
+with col1:
+    st.subheader("Posibles gangas")
+    st.dataframe(
+        valuation_df.nlargest(10, "value_gap_eur")[VALUATION_DISPLAY_COLS],
+        use_container_width=True,
+        hide_index=True,
+        column_config=VALUATION_COLUMN_CONFIG,
+    )
+with col2:
+    st.subheader("Posibles sobrevaloraciones")
+    st.dataframe(
+        valuation_df.nsmallest(10, "value_gap_eur")[VALUATION_DISPLAY_COLS],
+        use_container_width=True,
+        hide_index=True,
+        column_config=VALUATION_COLUMN_CONFIG,
+    )
+
+st.header("Jugadores parecidos")
+st.caption(
+    "Similitud coseno sobre el perfil de producción por 90' (goles, asistencias, xG, xA, "
+    "tiros, pases clave), estandarizado — compara estilo de producción, no volumen total. "
+    "Limitado a F/M por la misma razón que la valoración: sin stats defensivas, un "
+    "'parecido' entre defensas o porteros no sería real."
+)
+similarity_options = load_similarity_options()
+selected_name = st.selectbox("Elige un jugador", similarity_options["player"])
+selected_id = int(similarity_options.loc[similarity_options["player"] == selected_name, "id"].iloc[0])
+similar_df = load_similar_players(selected_id)
+st.dataframe(
+    similar_df[["similar_player", "position", "similarity"]],
+    use_container_width=True,
+    hide_index=True,
+    column_config={
+        "similar_player": st.column_config.TextColumn("Jugador parecido"),
+        "position": st.column_config.TextColumn("Posición"),
+        "similarity": st.column_config.NumberColumn("Similitud", format="%.3f"),
+    },
+)
+
+st.header("Equipos que juegan parecido")
+st.caption(
+    "Similitud coseno sobre el perfil de estilo por partido (xG/xGA a favor y en contra, "
+    "ppda —presión, más bajo es más agresiva— y deep —pases cerca del área rival, proxy "
+    "de verticalidad—), estandarizado y promediado en la temporada."
+)
+team_style_options = load_team_style_options()
+selected_team_name = st.selectbox("Elige un equipo", team_style_options["team"])
+selected_team_id = int(team_style_options.loc[team_style_options["team"] == selected_team_name, "id"].iloc[0])
+similar_teams_df = load_similar_teams(selected_team_id)
+st.dataframe(
+    similar_teams_df,
+    use_container_width=True,
+    hide_index=True,
+    column_config={
+        "similar_team": st.column_config.TextColumn("Equipo parecido"),
+        "similarity": st.column_config.NumberColumn("Similitud", format="%.3f"),
+    },
+)
+
+st.header("Forma reciente (últimos 5 partidos)")
+st.caption("Suma de los deltas de Elo de los últimos 5 partidos — mide momento, no nivel absoluto.")
+form_col1, form_col2 = st.columns(2)
+with form_col1:
+    club_form_df = load_club_form()
+    st.altair_chart(
+        ranking_chart(club_form_df, "team", BLUE, height=22 * len(club_form_df), value_col="form_score", x_title="Forma"),
+        use_container_width=True,
+    )
+with form_col2:
+    player_form_df = load_player_form()
+    st.altair_chart(
+        ranking_chart(player_form_df, "player", AQUA, height=22 * len(player_form_df), value_col="form_score", x_title="Forma"),
+        use_container_width=True,
+    )
+
+st.header("Mejores de la semana")
+st.caption("Mayor delta de Elo en un único partido, dentro de los últimos 7 días respecto al partido más reciente registrado.")
+week_col1, week_col2 = st.columns(2)
+WEEK_COLUMN_CONFIG = {
+    "match_date": st.column_config.DateColumn("Fecha"),
+    "delta": st.column_config.NumberColumn("Delta Elo", format="%.1f"),
+}
+with week_col1:
+    st.subheader("Clubes")
+    st.dataframe(
+        load_club_week_best(),
+        use_container_width=True,
+        hide_index=True,
+        column_config={"team": st.column_config.TextColumn("Equipo"), **WEEK_COLUMN_CONFIG},
+    )
+with week_col2:
+    st.subheader("Jugadores")
+    st.dataframe(
+        load_player_week_best(),
+        use_container_width=True,
+        hide_index=True,
+        column_config={"player": st.column_config.TextColumn("Jugador"), **WEEK_COLUMN_CONFIG},
+    )
+
+st.header("Futuras promesas (U21)")
+st.caption(
+    "Jugadores de 21 años o menos cuyo rendimiento (mismo modelo que la valoración Moneyball) "
+    "ya justificaría un valor de mercado más alto del que tienen hoy."
+)
+st.dataframe(
+    load_young_talents(),
+    use_container_width=True,
+    hide_index=True,
+    column_config={
+        "player": st.column_config.TextColumn("Jugador"),
+        "age": st.column_config.NumberColumn("Edad"),
+        "market_value_eur": st.column_config.NumberColumn("Valor mercado (€)", format="compact"),
+        "predicted_value_eur": st.column_config.NumberColumn("Valor predicho (€)", format="compact"),
+        "value_gap_pct": st.column_config.NumberColumn("Gap", format="%.0f%%"),
+    },
+)

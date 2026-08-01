@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+scrape_full_log.txt
+streamlit_log.txt
+streamlit_test*.txt
+streamlit_all_test.txt
+streamlit_fix_test.txt
+flow_run_log.txt
+.history/

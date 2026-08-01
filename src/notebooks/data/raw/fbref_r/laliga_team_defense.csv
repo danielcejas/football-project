@@ -1,0 +1,321 @@
+Season_End_Year,Squad,Comp,Team_or_Opponent,Num_Players,Mins_Per_90,Tkl_Tackles,TklW_Tackles,Def 3rd_Tackles,Mid 3rd_Tackles,Att 3rd_Tackles,Tkl_Challenges,Att_Challenges,Tkl_percent_Challenges,Lost_Challenges,Blocks_Blocks,Sh_Blocks,Pass_Blocks,Int,Tkl+Int,Clr,Err,Url
+2018,Alavés,La Liga,team,30,38,702,464,364,265,73,267,663,40.3,396,407,133,274,498,1200,981,11,https://fbref.com/en/squads/8d6fd021/2017-2018/Alaves-Stats
+2018,Alavés,La Liga,opponent,30,38,650,462,323,246,81,246,576,42.7,330,317,88,229,422,1072,721,5,https://fbref.com/en/squads/8d6fd021/2017-2018/Alaves-Stats
+2018,Athletic Club,La Liga,team,26,38,739,486,359,304,76,296,735,40.3,439,432,103,329,465,1204,820,9,https://fbref.com/en/squads/2b390eca/2017-2018/Athletic-Club-Stats
+2018,Athletic Club,La Liga,opponent,26,38,670,449,332,280,58,261,611,42.7,350,374,76,298,422,1092,919,6,https://fbref.com/en/squads/2b390eca/2017-2018/Athletic-Club-Stats
+2018,Atlético Madrid,La Liga,team,26,38,917,614,442,372,103,377,847,44.5,470,462,129,333,513,1430,885,4,https://fbref.com/en/squads/db3b9613/2017-2018/Atletico-Madrid-Stats
+2018,Atlético Madrid,La Liga,opponent,26,38,715,494,346,273,96,267,693,38.5,426,390,91,299,488,1203,792,12,https://fbref.com/en/squads/db3b9613/2017-2018/Atletico-Madrid-Stats
+2018,Barcelona,La Liga,team,25,38,629,413,281,262,86,229,552,41.5,323,366,103,263,424,1053,525,10,https://fbref.com/en/squads/206d90db/2017-2018/Barcelona-Stats
+2018,Barcelona,La Liga,opponent,25,38,819,517,438,307,74,354,973,36.4,619,477,128,349,618,1437,694,14,https://fbref.com/en/squads/206d90db/2017-2018/Barcelona-Stats
+2018,Betis,La Liga,team,29,38,635,424,319,252,64,213,537,39.7,324,356,95,261,427,1062,869,17,https://fbref.com/en/squads/fc536746/2017-2018/Real-Betis-Stats
+2018,Betis,La Liga,opponent,29,38,622,405,296,261,65,240,679,35.3,439,356,94,262,448,1070,566,8,https://fbref.com/en/squads/fc536746/2017-2018/Real-Betis-Stats
+2018,Celta Vigo,La Liga,team,23,38,589,420,304,232,53,218,556,39.2,338,327,101,226,497,1086,780,10,https://fbref.com/en/squads/f25da7fb/2017-2018/Celta-Vigo-Stats
+2018,Celta Vigo,La Liga,opponent,23,38,655,426,296,288,71,227,603,37.6,376,372,103,269,495,1150,735,13,https://fbref.com/en/squads/f25da7fb/2017-2018/Celta-Vigo-Stats
+2018,Eibar,La Liga,team,27,38,643,436,271,282,90,258,613,42.1,355,349,53,296,554,1197,712,9,https://fbref.com/en/squads/bea5c710/2017-2018/Eibar-Stats
+2018,Eibar,La Liga,opponent,27,38,671,435,402,231,38,297,649,45.8,352,401,115,286,510,1181,1156,4,https://fbref.com/en/squads/bea5c710/2017-2018/Eibar-Stats
+2018,Espanyol,La Liga,team,25,38,716,500,357,278,81,271,700,38.7,429,362,116,246,515,1231,902,9,https://fbref.com/en/squads/a8661628/2017-2018/Espanyol-Stats
+2018,Espanyol,La Liga,opponent,25,38,661,443,318,275,68,273,596,45.8,323,404,95,309,433,1094,846,9,https://fbref.com/en/squads/a8661628/2017-2018/Espanyol-Stats
+2018,Getafe,La Liga,team,32,38,715,491,369,267,79,276,732,37.7,456,350,69,281,487,1202,899,5,https://fbref.com/en/squads/7848bd64/2017-2018/Getafe-Stats
+2018,Getafe,La Liga,opponent,32,38,696,480,350,273,73,288,584,49.3,296,357,83,274,515,1211,788,14,https://fbref.com/en/squads/7848bd64/2017-2018/Getafe-Stats
+2018,Girona,La Liga,team,25,38,611,403,299,254,58,240,606,39.6,366,329,84,245,490,1101,858,6,https://fbref.com/en/squads/9024a00a/2017-2018/Girona-Stats
+2018,Girona,La Liga,opponent,25,38,653,439,318,268,67,284,644,44.1,360,308,96,212,396,1049,896,16,https://fbref.com/en/squads/9024a00a/2017-2018/Girona-Stats
+2018,La Coruña,La Liga,team,32,38,728,500,386,282,60,292,679,43,387,391,113,278,484,1212,942,13,https://fbref.com/en/squads/2a60ed82/2017-2018/Deportivo-La-Coruna-Stats
+2018,La Coruña,La Liga,opponent,32,38,624,431,306,263,55,245,620,39.5,375,356,102,254,491,1115,825,8,https://fbref.com/en/squads/2a60ed82/2017-2018/Deportivo-La-Coruna-Stats
+2018,Las Palmas,La Liga,team,36,38,654,433,325,269,60,268,647,41.4,379,367,112,255,508,1162,713,21,https://fbref.com/en/squads/0049d422/2017-2018/Las-Palmas-Stats
+2018,Las Palmas,La Liga,opponent,36,38,722,514,306,331,85,264,713,37,449,355,90,265,506,1228,785,5,https://fbref.com/en/squads/0049d422/2017-2018/Las-Palmas-Stats
+2018,Leganés,La Liga,team,28,38,721,483,350,307,64,323,697,46.3,374,361,87,274,583,1304,777,9,https://fbref.com/en/squads/7c6f2c78/2017-2018/Leganes-Stats
+2018,Leganés,La Liga,opponent,28,38,720,474,356,284,80,267,608,43.9,341,371,85,286,432,1152,796,7,https://fbref.com/en/squads/7c6f2c78/2017-2018/Leganes-Stats
+2018,Levante,La Liga,team,33,38,616,414,328,222,66,239,625,38.2,386,395,127,268,477,1093,811,9,https://fbref.com/en/squads/9800b6a1/2017-2018/Levante-Stats
+2018,Levante,La Liga,opponent,33,38,755,522,380,282,93,310,685,45.3,375,380,105,275,454,1209,813,7,https://fbref.com/en/squads/9800b6a1/2017-2018/Levante-Stats
+2018,Málaga,La Liga,team,37,38,745,509,383,276,86,272,707,38.5,435,362,101,261,497,1242,890,3,https://fbref.com/en/squads/1c896955/2017-2018/Malaga-Stats
+2018,Málaga,La Liga,opponent,37,38,748,509,347,315,86,278,586,47.4,308,359,88,271,452,1200,941,8,https://fbref.com/en/squads/1c896955/2017-2018/Malaga-Stats
+2018,Real Madrid,La Liga,team,24,38,687,470,317,275,95,252,621,40.6,369,362,83,279,424,1111,536,16,https://fbref.com/en/squads/53a2f082/2017-2018/Real-Madrid-Stats
+2018,Real Madrid,La Liga,opponent,24,38,644,418,358,205,81,251,752,33.4,501,431,152,279,486,1130,974,17,https://fbref.com/en/squads/53a2f082/2017-2018/Real-Madrid-Stats
+2018,Real Sociedad,La Liga,team,27,38,547,374,249,228,70,227,536,42.4,309,367,91,276,446,993,665,6,https://fbref.com/en/squads/e31d1cd9/2017-2018/Real-Sociedad-Stats
+2018,Real Sociedad,La Liga,opponent,27,38,708,510,366,266,76,261,623,41.9,362,430,127,303,489,1197,855,13,https://fbref.com/en/squads/e31d1cd9/2017-2018/Real-Sociedad-Stats
+2018,Sevilla,La Liga,team,31,38,768,535,354,325,89,296,685,43.2,389,419,114,305,409,1177,849,17,https://fbref.com/en/squads/ad2be733/2017-2018/Sevilla-Stats
+2018,Sevilla,La Liga,opponent,31,38,699,471,353,277,69,269,661,40.7,392,442,118,324,467,1166,851,12,https://fbref.com/en/squads/ad2be733/2017-2018/Sevilla-Stats
+2018,Valencia,La Liga,team,25,38,745,492,407,267,71,309,692,44.7,383,416,108,308,459,1204,910,9,https://fbref.com/en/squads/dcc91a7b/2017-2018/Valencia-Stats
+2018,Valencia,La Liga,opponent,25,38,746,488,335,312,99,271,699,38.8,428,364,108,256,542,1288,698,13,https://fbref.com/en/squads/dcc91a7b/2017-2018/Valencia-Stats
+2018,Villarreal,La Liga,team,32,38,711,466,356,278,77,277,700,39.6,423,447,131,316,427,1138,1023,7,https://fbref.com/en/squads/2a8183b3/2017-2018/Villarreal-Stats
+2018,Villarreal,La Liga,opponent,32,38,640,440,294,260,86,247,575,43,328,383,109,274,518,1158,696,9,https://fbref.com/en/squads/2a8183b3/2017-2018/Villarreal-Stats
+2019,Alavés,La Liga,team,26,38,646,389,352,228,66,254,595,42.7,341,419,117,302,390,1036,1066,13,https://fbref.com/en/squads/8d6fd021/2018-2019/Alaves-Stats
+2019,Alavés,La Liga,opponent,26,38,554,330,259,240,55,213,489,43.6,276,363,91,272,364,918,859,10,https://fbref.com/en/squads/8d6fd021/2018-2019/Alaves-Stats
+2019,Athletic Club,La Liga,team,27,38,643,384,311,245,87,245,646,37.9,401,414,93,321,453,1096,815,7,https://fbref.com/en/squads/2b390eca/2018-2019/Athletic-Club-Stats
+2019,Athletic Club,La Liga,opponent,27,38,598,402,290,234,74,254,542,46.9,288,375,81,294,355,953,868,8,https://fbref.com/en/squads/2b390eca/2018-2019/Athletic-Club-Stats
+2019,Atlético Madrid,La Liga,team,29,38,784,487,402,298,84,319,700,45.6,381,374,94,280,463,1247,837,12,https://fbref.com/en/squads/db3b9613/2018-2019/Atletico-Madrid-Stats
+2019,Atlético Madrid,La Liga,opponent,29,38,617,383,331,212,74,205,571,35.9,366,394,100,294,436,1053,817,9,https://fbref.com/en/squads/db3b9613/2018-2019/Atletico-Madrid-Stats
+2019,Barcelona,La Liga,team,30,38,537,346,218,232,87,226,492,45.9,266,360,101,259,391,928,565,16,https://fbref.com/en/squads/206d90db/2018-2019/Barcelona-Stats
+2019,Barcelona,La Liga,opponent,30,38,742,435,426,252,64,307,753,40.8,446,438,106,332,545,1287,689,23,https://fbref.com/en/squads/206d90db/2018-2019/Barcelona-Stats
+2019,Betis,La Liga,team,25,38,615,378,309,227,79,219,544,40.3,325,382,80,302,361,976,702,21,https://fbref.com/en/squads/fc536746/2018-2019/Real-Betis-Stats
+2019,Betis,La Liga,opponent,25,38,659,392,318,258,83,267,716,37.3,449,421,114,307,424,1083,757,16,https://fbref.com/en/squads/fc536746/2018-2019/Real-Betis-Stats
+2019,Celta Vigo,La Liga,team,28,38,634,377,364,213,57,258,562,45.9,304,380,105,275,382,1016,889,19,https://fbref.com/en/squads/f25da7fb/2018-2019/Celta-Vigo-Stats
+2019,Celta Vigo,La Liga,opponent,28,38,617,379,290,250,77,246,626,39.3,380,386,120,266,361,978,727,13,https://fbref.com/en/squads/f25da7fb/2018-2019/Celta-Vigo-Stats
+2019,Eibar,La Liga,team,25,38,637,424,238,289,110,240,563,42.6,323,357,53,304,368,1005,683,10,https://fbref.com/en/squads/bea5c710/2018-2019/Eibar-Stats
+2019,Eibar,La Liga,opponent,25,38,635,393,387,197,51,248,592,41.9,344,453,98,355,474,1109,1263,15,https://fbref.com/en/squads/bea5c710/2018-2019/Eibar-Stats
+2019,Espanyol,La Liga,team,25,38,655,394,324,244,87,263,684,38.5,421,402,134,268,408,1063,950,14,https://fbref.com/en/squads/a8661628/2018-2019/Espanyol-Stats
+2019,Espanyol,La Liga,opponent,25,38,578,382,275,208,95,204,522,39.1,318,441,113,328,420,998,690,17,https://fbref.com/en/squads/a8661628/2018-2019/Espanyol-Stats
+2019,Getafe,La Liga,team,26,38,604,358,246,281,77,255,617,41.3,362,422,81,341,453,1057,888,15,https://fbref.com/en/squads/7848bd64/2018-2019/Getafe-Stats
+2019,Getafe,La Liga,opponent,26,38,643,389,336,240,67,277,576,48.1,299,416,97,319,342,985,878,14,https://fbref.com/en/squads/7848bd64/2018-2019/Getafe-Stats
+2019,Girona,La Liga,team,26,38,613,367,309,247,57,264,636,41.5,372,401,124,277,432,1045,928,14,https://fbref.com/en/squads/9024a00a/2018-2019/Girona-Stats
+2019,Girona,La Liga,opponent,26,38,591,366,304,234,53,221,537,41.2,316,311,75,236,407,998,858,17,https://fbref.com/en/squads/9024a00a/2018-2019/Girona-Stats
+2019,Huesca,La Liga,team,30,38,712,452,363,290,59,303,694,43.7,391,414,107,307,440,1152,953,12,https://fbref.com/en/squads/c6c493e6/2018-2019/Huesca-Stats
+2019,Huesca,La Liga,opponent,30,38,634,399,291,272,71,278,592,47,314,383,102,281,374,1008,913,9,https://fbref.com/en/squads/c6c493e6/2018-2019/Huesca-Stats
+2019,Leganés,La Liga,team,29,38,609,382,325,221,63,227,581,39.1,354,329,84,245,432,1041,907,10,https://fbref.com/en/squads/7c6f2c78/2018-2019/Leganes-Stats
+2019,Leganés,La Liga,opponent,29,38,520,342,255,198,67,216,469,46.1,253,319,78,241,351,871,916,11,https://fbref.com/en/squads/7c6f2c78/2018-2019/Leganes-Stats
+2019,Levante,La Liga,team,26,38,572,372,308,196,68,264,722,36.6,458,455,151,304,422,994,842,12,https://fbref.com/en/squads/9800b6a1/2018-2019/Levante-Stats
+2019,Levante,La Liga,opponent,26,38,765,480,367,296,102,336,738,45.5,402,397,106,291,397,1162,825,12,https://fbref.com/en/squads/9800b6a1/2018-2019/Levante-Stats
+2019,Rayo Vallecano,La Liga,team,29,38,651,422,369,223,59,257,592,43.4,335,388,77,311,433,1084,931,16,https://fbref.com/en/squads/98e8af82/2018-2019/Rayo-Vallecano-Stats
+2019,Rayo Vallecano,La Liga,opponent,29,38,809,491,335,354,120,314,848,37,534,380,120,260,371,1180,768,15,https://fbref.com/en/squads/98e8af82/2018-2019/Rayo-Vallecano-Stats
+2019,Real Madrid,La Liga,team,27,38,626,395,267,253,106,245,629,39,384,374,78,296,373,999,602,11,https://fbref.com/en/squads/53a2f082/2018-2019/Real-Madrid-Stats
+2019,Real Madrid,La Liga,opponent,27,38,651,397,334,243,74,295,755,39.1,460,465,148,317,449,1100,856,18,https://fbref.com/en/squads/53a2f082/2018-2019/Real-Madrid-Stats
+2019,Real Sociedad,La Liga,team,30,38,579,344,299,219,61,248,584,42.5,336,444,109,335,425,1004,842,19,https://fbref.com/en/squads/e31d1cd9/2018-2019/Real-Sociedad-Stats
+2019,Real Sociedad,La Liga,opponent,30,38,733,478,349,290,94,267,678,39.4,411,406,89,317,390,1123,721,11,https://fbref.com/en/squads/e31d1cd9/2018-2019/Real-Sociedad-Stats
+2019,Sevilla,La Liga,team,27,38,598,408,288,237,73,203,513,39.6,310,370,114,256,365,963,817,15,https://fbref.com/en/squads/ad2be733/2018-2019/Sevilla-Stats
+2019,Sevilla,La Liga,opponent,27,38,640,396,297,245,98,249,606,41.1,357,455,128,327,444,1084,994,15,https://fbref.com/en/squads/ad2be733/2018-2019/Sevilla-Stats
+2019,Valencia,La Liga,team,25,38,598,384,299,228,71,238,588,40.5,350,447,120,327,418,1016,860,12,https://fbref.com/en/squads/dcc91a7b/2018-2019/Valencia-Stats
+2019,Valencia,La Liga,opponent,25,38,583,377,270,247,66,246,589,41.8,343,387,95,292,448,1031,818,16,https://fbref.com/en/squads/dcc91a7b/2018-2019/Valencia-Stats
+2019,Valladolid,La Liga,team,28,38,714,441,369,265,80,280,678,41.3,398,413,113,300,387,1101,874,16,https://fbref.com/en/squads/17859612/2018-2019/Valladolid-Stats
+2019,Valladolid,La Liga,opponent,28,38,530,347,260,216,54,183,477,38.4,294,358,87,271,395,925,825,12,https://fbref.com/en/squads/17859612/2018-2019/Valladolid-Stats
+2019,Villarreal,La Liga,team,26,38,667,413,333,255,79,273,659,41.4,386,406,142,264,390,1057,877,12,https://fbref.com/en/squads/2a8183b3/2018-2019/Villarreal-Stats
+2019,Villarreal,La Liga,opponent,26,38,595,359,319,205,71,255,603,42.3,348,403,129,274,439,1034,786,15,https://fbref.com/en/squads/2a8183b3/2018-2019/Villarreal-Stats
+2020,Alavés,La Liga,team,32,38,579,346,261,265,53,255,619,41.2,364,385,114,271,392,971,766,7,https://fbref.com/en/squads/8d6fd021/2019-2020/Alaves-Stats
+2020,Alavés,La Liga,opponent,32,38,555,347,228,258,69,246,497,49.5,251,291,66,225,329,884,584,10,https://fbref.com/en/squads/8d6fd021/2019-2020/Alaves-Stats
+2020,Athletic Club,La Liga,team,26,38,533,324,262,204,67,217,613,35.4,396,339,92,247,373,906,755,7,https://fbref.com/en/squads/2b390eca/2019-2020/Athletic-Club-Stats
+2020,Athletic Club,La Liga,opponent,26,38,549,313,270,222,57,250,587,42.6,337,330,85,245,327,876,704,15,https://fbref.com/en/squads/2b390eca/2019-2020/Athletic-Club-Stats
+2020,Atlético Madrid,La Liga,team,30,38,658,406,293,272,93,283,640,44.2,357,380,108,272,412,1070,729,18,https://fbref.com/en/squads/db3b9613/2019-2020/Atletico-Madrid-Stats
+2020,Atlético Madrid,La Liga,opponent,30,38,572,355,292,224,56,195,543,35.9,348,342,112,230,384,956,709,12,https://fbref.com/en/squads/db3b9613/2019-2020/Atletico-Madrid-Stats
+2020,Barcelona,La Liga,team,28,38,536,323,216,223,97,211,501,42.1,290,313,87,226,342,878,529,16,https://fbref.com/en/squads/206d90db/2019-2020/Barcelona-Stats
+2020,Barcelona,La Liga,opponent,28,38,623,361,351,202,70,269,793,33.9,524,430,117,313,525,1148,575,12,https://fbref.com/en/squads/206d90db/2019-2020/Barcelona-Stats
+2020,Betis,La Liga,team,27,38,501,299,276,173,52,221,511,43.2,290,336,119,217,302,803,682,8,https://fbref.com/en/squads/fc536746/2019-2020/Real-Betis-Stats
+2020,Betis,La Liga,opponent,27,38,623,374,301,251,71,268,713,37.6,445,369,108,261,364,987,644,13,https://fbref.com/en/squads/fc536746/2019-2020/Real-Betis-Stats
+2020,Celta Vigo,La Liga,team,30,38,589,357,344,193,52,251,615,40.8,364,345,89,256,396,985,807,12,https://fbref.com/en/squads/f25da7fb/2019-2020/Celta-Vigo-Stats
+2020,Celta Vigo,La Liga,opponent,30,38,615,348,253,275,87,240,610,39.3,370,401,88,313,384,999,646,14,https://fbref.com/en/squads/f25da7fb/2019-2020/Celta-Vigo-Stats
+2020,Eibar,La Liga,team,26,38,567,338,240,228,99,264,607,43.5,343,332,81,251,430,997,692,8,https://fbref.com/en/squads/bea5c710/2019-2020/Eibar-Stats
+2020,Eibar,La Liga,opponent,26,38,553,331,293,218,42,198,458,43.2,260,328,97,231,342,895,923,17,https://fbref.com/en/squads/bea5c710/2019-2020/Eibar-Stats
+2020,Espanyol,La Liga,team,31,38,628,364,303,253,72,257,701,36.7,444,380,96,284,360,988,731,17,https://fbref.com/en/squads/a8661628/2019-2020/Espanyol-Stats
+2020,Espanyol,La Liga,opponent,31,38,539,305,265,217,57,208,489,42.5,281,319,107,212,367,906,787,9,https://fbref.com/en/squads/a8661628/2019-2020/Espanyol-Stats
+2020,Getafe,La Liga,team,30,38,580,341,235,263,82,235,573,41,338,374,60,314,367,947,625,12,https://fbref.com/en/squads/7848bd64/2019-2020/Getafe-Stats
+2020,Getafe,La Liga,opponent,30,38,520,292,307,174,39,202,476,42.4,274,384,100,284,384,904,852,13,https://fbref.com/en/squads/7848bd64/2019-2020/Getafe-Stats
+2020,Granada,La Liga,team,27,38,584,349,257,257,70,238,570,41.8,332,375,118,257,383,967,750,10,https://fbref.com/en/squads/a0435291/2019-2020/Granada-Stats
+2020,Granada,La Liga,opponent,27,38,543,302,267,206,70,253,553,45.8,300,335,99,236,333,876,665,13,https://fbref.com/en/squads/a0435291/2019-2020/Granada-Stats
+2020,Leganés,La Liga,team,29,38,603,357,317,215,71,254,610,41.6,356,320,73,247,418,1021,687,7,https://fbref.com/en/squads/7c6f2c78/2019-2020/Leganes-Stats
+2020,Leganés,La Liga,opponent,29,38,530,339,260,214,56,239,581,41.1,342,324,100,224,332,862,850,6,https://fbref.com/en/squads/7c6f2c78/2019-2020/Leganes-Stats
+2020,Levante,La Liga,team,29,38,507,288,281,173,53,204,532,38.3,328,317,107,210,331,838,763,14,https://fbref.com/en/squads/9800b6a1/2019-2020/Levante-Stats
+2020,Levante,La Liga,opponent,29,38,553,349,242,226,85,251,637,39.4,386,385,112,273,321,874,662,7,https://fbref.com/en/squads/9800b6a1/2019-2020/Levante-Stats
+2020,Mallorca,La Liga,team,32,38,545,338,280,213,52,227,602,37.7,375,360,117,243,376,921,672,9,https://fbref.com/en/squads/2aa12281/2019-2020/Mallorca-Stats
+2020,Mallorca,La Liga,opponent,32,38,670,393,315,277,78,317,709,44.7,392,352,94,258,383,1053,690,8,https://fbref.com/en/squads/2aa12281/2019-2020/Mallorca-Stats
+2020,Osasuna,La Liga,team,31,38,613,361,275,267,71,267,617,43.3,350,385,98,287,417,1030,738,19,https://fbref.com/en/squads/03c57e2b/2019-2020/Osasuna-Stats
+2020,Osasuna,La Liga,opponent,31,38,516,316,234,218,64,210,525,40,315,345,91,254,406,922,776,18,https://fbref.com/en/squads/03c57e2b/2019-2020/Osasuna-Stats
+2020,Real Madrid,La Liga,team,26,38,586,355,252,253,81,226,595,38,369,367,77,290,381,967,590,13,https://fbref.com/en/squads/53a2f082/2019-2020/Real-Madrid-Stats
+2020,Real Madrid,La Liga,opponent,26,38,600,352,302,216,82,285,769,37.1,484,367,101,266,374,974,777,14,https://fbref.com/en/squads/53a2f082/2019-2020/Real-Madrid-Stats
+2020,Real Sociedad,La Liga,team,27,38,551,321,254,224,73,252,573,44,321,346,79,267,320,871,694,12,https://fbref.com/en/squads/e31d1cd9/2019-2020/Real-Sociedad-Stats
+2020,Real Sociedad,La Liga,opponent,27,38,591,359,268,260,63,234,589,39.7,355,421,108,313,409,1000,708,9,https://fbref.com/en/squads/e31d1cd9/2019-2020/Real-Sociedad-Stats
+2020,Sevilla,La Liga,team,26,38,587,344,274,246,67,261,661,39.5,400,331,94,237,346,933,704,10,https://fbref.com/en/squads/ad2be733/2019-2020/Sevilla-Stats
+2020,Sevilla,La Liga,opponent,26,38,606,380,304,226,76,254,667,38.1,413,385,109,276,430,1036,810,15,https://fbref.com/en/squads/ad2be733/2019-2020/Sevilla-Stats
+2020,Valencia,La Liga,team,28,38,500,311,270,173,57,232,589,39.4,357,334,130,204,360,860,748,12,https://fbref.com/en/squads/dcc91a7b/2019-2020/Valencia-Stats
+2020,Valencia,La Liga,opponent,28,38,486,288,207,201,78,203,548,37,345,274,74,200,372,858,634,11,https://fbref.com/en/squads/dcc91a7b/2019-2020/Valencia-Stats
+2020,Valladolid,La Liga,team,30,38,568,327,316,204,48,239,672,35.6,433,391,112,279,390,958,749,13,https://fbref.com/en/squads/17859612/2019-2020/Valladolid-Stats
+2020,Valladolid,La Liga,opponent,30,38,555,331,240,224,91,231,569,40.6,338,337,93,244,300,855,613,11,https://fbref.com/en/squads/17859612/2019-2020/Valladolid-Stats
+2020,Villarreal,La Liga,team,25,38,553,323,250,239,64,218,602,36.2,384,362,116,246,339,892,814,12,https://fbref.com/en/squads/2a8183b3/2019-2020/Villarreal-Stats
+2020,Villarreal,La Liga,opponent,25,38,569,337,257,229,83,259,690,37.5,431,353,106,247,369,938,616,9,https://fbref.com/en/squads/2a8183b3/2019-2020/Villarreal-Stats
+2021,Alavés,La Liga,team,30,38,499,292,263,181,55,197,565,34.9,368,341,90,251,427,926,766,8,https://fbref.com/en/squads/8d6fd021/2020-2021/Alaves-Stats
+2021,Alavés,La Liga,opponent,30,38,469,279,197,215,57,213,467,45.6,254,309,89,220,342,811,623,12,https://fbref.com/en/squads/8d6fd021/2020-2021/Alaves-Stats
+2021,Athletic Club,La Liga,team,27,38,462,269,194,200,68,168,516,32.6,348,341,74,267,344,806,684,9,https://fbref.com/en/squads/2b390eca/2020-2021/Athletic-Club-Stats
+2021,Athletic Club,La Liga,opponent,27,38,532,302,265,226,41,197,501,39.3,304,396,94,302,484,1016,772,6,https://fbref.com/en/squads/2b390eca/2020-2021/Athletic-Club-Stats
+2021,Atlético Madrid,La Liga,team,25,38,622,367,291,253,78,296,631,46.9,335,361,83,278,386,1008,671,7,https://fbref.com/en/squads/db3b9613/2020-2021/Atletico-Madrid-Stats
+2021,Atlético Madrid,La Liga,opponent,25,38,556,315,308,185,63,214,588,36.4,374,359,88,271,454,1010,674,9,https://fbref.com/en/squads/db3b9613/2020-2021/Atletico-Madrid-Stats
+2021,Barcelona,La Liga,team,25,38,499,293,223,195,81,224,522,42.9,298,325,70,255,361,860,429,16,https://fbref.com/en/squads/206d90db/2020-2021/Barcelona-Stats
+2021,Barcelona,La Liga,opponent,25,38,598,320,357,181,60,257,770,33.4,513,440,133,307,517,1115,639,8,https://fbref.com/en/squads/206d90db/2020-2021/Barcelona-Stats
+2021,Betis,La Liga,team,25,38,556,315,274,221,61,211,556,37.9,345,362,74,288,453,1009,687,11,https://fbref.com/en/squads/fc536746/2020-2021/Real-Betis-Stats
+2021,Betis,La Liga,opponent,25,38,585,335,286,244,55,218,638,34.2,420,407,129,278,367,952,611,12,https://fbref.com/en/squads/fc536746/2020-2021/Real-Betis-Stats
+2021,Celta Vigo,La Liga,team,30,38,662,368,332,259,71,238,694,34.3,456,399,89,310,405,1067,751,12,https://fbref.com/en/squads/f25da7fb/2020-2021/Celta-Vigo-Stats
+2021,Celta Vigo,La Liga,opponent,30,38,468,288,183,204,81,189,465,40.6,276,344,76,268,489,957,522,6,https://fbref.com/en/squads/f25da7fb/2020-2021/Celta-Vigo-Stats
+2021,Cádiz,La Liga,team,34,38,573,317,305,216,52,247,607,40.7,360,368,99,269,437,1010,788,8,https://fbref.com/en/squads/ee7c297c/2020-2021/Cadiz-Stats
+2021,Cádiz,La Liga,opponent,34,38,486,300,217,199,70,192,513,37.4,321,244,41,203,302,788,660,10,https://fbref.com/en/squads/ee7c297c/2020-2021/Cadiz-Stats
+2021,Eibar,La Liga,team,30,38,514,309,228,204,82,203,518,39.2,315,360,63,297,434,948,593,11,https://fbref.com/en/squads/bea5c710/2020-2021/Eibar-Stats
+2021,Eibar,La Liga,opponent,30,38,519,319,285,196,38,199,519,38.3,320,359,98,261,406,925,933,7,https://fbref.com/en/squads/bea5c710/2020-2021/Eibar-Stats
+2021,Elche,La Liga,team,30,38,551,336,324,189,38,210,577,36.4,367,357,97,260,386,937,689,10,https://fbref.com/en/squads/6c8b07df/2020-2021/Elche-Stats
+2021,Elche,La Liga,opponent,30,38,598,347,216,281,101,253,618,40.9,365,327,57,270,405,1003,586,8,https://fbref.com/en/squads/6c8b07df/2020-2021/Elche-Stats
+2021,Getafe,La Liga,team,31,38,579,352,232,276,71,241,619,38.9,378,361,53,308,393,972,615,4,https://fbref.com/en/squads/7848bd64/2020-2021/Getafe-Stats
+2021,Getafe,La Liga,opponent,31,38,574,313,339,196,39,220,483,45.5,263,352,88,264,390,964,838,3,https://fbref.com/en/squads/7848bd64/2020-2021/Getafe-Stats
+2021,Granada,La Liga,team,34,38,499,279,226,213,60,185,468,39.5,283,388,128,260,392,891,764,7,https://fbref.com/en/squads/a0435291/2020-2021/Granada-Stats
+2021,Granada,La Liga,opponent,34,38,550,313,265,227,58,204,516,39.5,312,363,78,285,359,909,613,9,https://fbref.com/en/squads/a0435291/2020-2021/Granada-Stats
+2021,Huesca,La Liga,team,27,38,556,321,309,191,56,239,579,41.3,340,342,83,259,437,993,616,7,https://fbref.com/en/squads/c6c493e6/2020-2021/Huesca-Stats
+2021,Huesca,La Liga,opponent,27,38,533,309,212,221,100,228,654,34.9,426,325,80,245,323,856,773,14,https://fbref.com/en/squads/c6c493e6/2020-2021/Huesca-Stats
+2021,Levante,La Liga,team,29,38,511,282,268,188,55,208,543,38.3,335,335,93,242,435,946,681,15,https://fbref.com/en/squads/9800b6a1/2020-2021/Levante-Stats
+2021,Levante,La Liga,opponent,29,38,575,335,287,205,83,249,615,40.5,366,375,76,299,434,1009,638,8,https://fbref.com/en/squads/9800b6a1/2020-2021/Levante-Stats
+2021,Osasuna,La Liga,team,28,38,524,281,223,217,84,224,552,40.6,328,349,100,249,392,916,774,7,https://fbref.com/en/squads/03c57e2b/2020-2021/Osasuna-Stats
+2021,Osasuna,La Liga,opponent,28,38,505,309,252,195,58,195,440,44.3,245,312,79,233,338,843,694,7,https://fbref.com/en/squads/03c57e2b/2020-2021/Osasuna-Stats
+2021,Real Madrid,La Liga,team,30,38,531,318,266,188,77,192,532,36.1,340,344,83,261,398,929,544,12,https://fbref.com/en/squads/53a2f082/2020-2021/Real-Madrid-Stats
+2021,Real Madrid,La Liga,opponent,30,38,531,295,277,184,70,216,645,33.5,429,418,133,285,380,911,707,16,https://fbref.com/en/squads/53a2f082/2020-2021/Real-Madrid-Stats
+2021,Real Sociedad,La Liga,team,30,38,547,322,240,227,80,200,480,41.7,280,353,96,257,315,862,563,5,https://fbref.com/en/squads/e31d1cd9/2020-2021/Real-Sociedad-Stats
+2021,Real Sociedad,La Liga,opponent,30,38,531,311,253,212,66,220,550,40,330,413,104,309,379,910,710,16,https://fbref.com/en/squads/e31d1cd9/2020-2021/Real-Sociedad-Stats
+2021,Sevilla,La Liga,team,26,38,492,297,220,200,72,184,510,36.1,326,310,90,220,362,854,636,10,https://fbref.com/en/squads/ad2be733/2020-2021/Sevilla-Stats
+2021,Sevilla,La Liga,opponent,26,38,516,306,255,196,65,207,599,34.6,392,325,87,238,407,923,635,13,https://fbref.com/en/squads/ad2be733/2020-2021/Sevilla-Stats
+2021,Valencia,La Liga,team,30,38,463,277,241,163,59,198,592,33.4,394,372,123,249,392,855,785,12,https://fbref.com/en/squads/dcc91a7b/2020-2021/Valencia-Stats
+2021,Valencia,La Liga,opponent,30,38,480,295,210,198,72,212,553,38.3,341,332,93,239,391,871,540,9,https://fbref.com/en/squads/dcc91a7b/2020-2021/Valencia-Stats
+2021,Valladolid,La Liga,team,32,38,559,321,285,208,66,247,681,36.3,434,379,102,277,431,990,812,9,https://fbref.com/en/squads/17859612/2020-2021/Valladolid-Stats
+2021,Valladolid,La Liga,opponent,32,38,541,314,256,206,79,213,504,42.3,291,311,74,237,368,909,701,12,https://fbref.com/en/squads/17859612/2020-2021/Valladolid-Stats
+2021,Villarreal,La Liga,team,29,38,539,313,256,205,78,239,588,40.6,349,358,101,257,371,910,638,17,https://fbref.com/en/squads/2a8183b3/2020-2021/Villarreal-Stats
+2021,Villarreal,La Liga,opponent,29,38,591,324,280,223,88,255,692,36.8,437,394,94,300,416,1007,617,12,https://fbref.com/en/squads/2a8183b3/2020-2021/Villarreal-Stats
+2022,Alavés,La Liga,team,33,38,550,324,271,221,58,262,637,41.1,375,373,106,267,376,926,890,7,https://fbref.com/en/squads/8d6fd021/2021-2022/Alaves-Stats
+2022,Alavés,La Liga,opponent,33,38,511,273,249,193,69,233,504,46.2,271,351,87,264,311,822,729,12,https://fbref.com/en/squads/8d6fd021/2021-2022/Alaves-Stats
+2022,Athletic Club,La Liga,team,26,38,508,292,217,216,75,224,582,38.5,358,411,128,283,339,847,788,8,https://fbref.com/en/squads/2b390eca/2021-2022/Athletic-Club-Stats
+2022,Athletic Club,La Liga,opponent,26,38,573,353,293,224,56,232,529,43.9,297,393,131,262,387,960,817,14,https://fbref.com/en/squads/2b390eca/2021-2022/Athletic-Club-Stats
+2022,Atlético Madrid,La Liga,team,26,38,636,346,290,279,67,293,619,47.3,326,372,98,274,365,1001,649,14,https://fbref.com/en/squads/db3b9613/2021-2022/Atletico-Madrid-Stats
+2022,Atlético Madrid,La Liga,opponent,26,38,570,309,297,201,72,217,600,36.2,383,364,103,261,404,974,803,10,https://fbref.com/en/squads/db3b9613/2021-2022/Atletico-Madrid-Stats
+2022,Barcelona,La Liga,team,38,38,587,331,236,270,81,244,493,49.5,249,346,85,261,325,912,467,17,https://fbref.com/en/squads/206d90db/2021-2022/Barcelona-Stats
+2022,Barcelona,La Liga,opponent,38,38,631,352,309,250,72,273,747,36.5,474,376,109,267,392,1023,809,10,https://fbref.com/en/squads/206d90db/2021-2022/Barcelona-Stats
+2022,Betis,La Liga,team,31,38,662,392,322,261,79,324,695,46.6,371,386,112,274,361,1023,777,11,https://fbref.com/en/squads/fc536746/2021-2022/Real-Betis-Stats
+2022,Betis,La Liga,opponent,31,38,647,370,331,254,62,282,654,43.1,372,416,135,281,375,1022,614,11,https://fbref.com/en/squads/fc536746/2021-2022/Real-Betis-Stats
+2022,Celta Vigo,La Liga,team,25,38,696,409,324,279,93,286,762,37.5,476,423,91,332,376,1072,634,11,https://fbref.com/en/squads/f25da7fb/2021-2022/Celta-Vigo-Stats
+2022,Celta Vigo,La Liga,opponent,25,38,554,324,236,237,81,244,590,41.4,346,410,97,313,454,1008,776,14,https://fbref.com/en/squads/f25da7fb/2021-2022/Celta-Vigo-Stats
+2022,Cádiz,La Liga,team,33,38,647,380,346,238,63,301,711,42.3,410,390,106,284,413,1060,768,5,https://fbref.com/en/squads/ee7c297c/2021-2022/Cadiz-Stats
+2022,Cádiz,La Liga,opponent,33,38,529,312,265,197,67,238,519,45.9,281,328,89,239,323,852,792,12,https://fbref.com/en/squads/ee7c297c/2021-2022/Cadiz-Stats
+2022,Elche,La Liga,team,28,38,589,325,335,191,63,268,622,43.1,354,367,126,241,305,894,769,14,https://fbref.com/en/squads/6c8b07df/2021-2022/Elche-Stats
+2022,Elche,La Liga,opponent,28,38,588,346,244,268,76,258,597,43.2,339,363,87,276,359,947,617,9,https://fbref.com/en/squads/6c8b07df/2021-2022/Elche-Stats
+2022,Espanyol,La Liga,team,34,38,557,338,308,196,53,275,646,42.6,371,360,114,246,326,883,892,20,https://fbref.com/en/squads/a8661628/2021-2022/Espanyol-Stats
+2022,Espanyol,La Liga,opponent,34,38,574,350,248,249,77,243,616,39.4,373,338,98,240,287,861,591,4,https://fbref.com/en/squads/a8661628/2021-2022/Espanyol-Stats
+2022,Getafe,La Liga,team,31,38,587,360,266,243,78,248,594,41.8,346,400,96,304,401,988,719,8,https://fbref.com/en/squads/7848bd64/2021-2022/Getafe-Stats
+2022,Getafe,La Liga,opponent,31,38,511,279,204,239,68,210,452,46.5,242,343,106,237,357,868,668,8,https://fbref.com/en/squads/7848bd64/2021-2022/Getafe-Stats
+2022,Granada,La Liga,team,32,38,611,343,310,240,61,274,632,43.4,358,437,130,307,326,937,841,8,https://fbref.com/en/squads/a0435291/2021-2022/Granada-Stats
+2022,Granada,La Liga,opponent,32,38,546,280,268,193,85,225,495,45.5,270,359,106,253,307,853,662,11,https://fbref.com/en/squads/a0435291/2021-2022/Granada-Stats
+2022,Levante,La Liga,team,31,38,558,305,268,212,78,237,611,38.8,374,326,110,216,377,935,735,12,https://fbref.com/en/squads/9800b6a1/2021-2022/Levante-Stats
+2022,Levante,La Liga,opponent,31,38,637,384,345,238,54,335,683,49,348,379,107,272,327,964,621,17,https://fbref.com/en/squads/9800b6a1/2021-2022/Levante-Stats
+2022,Mallorca,La Liga,team,33,38,607,332,301,235,71,248,551,45,303,374,119,255,344,951,826,9,https://fbref.com/en/squads/2aa12281/2021-2022/Mallorca-Stats
+2022,Mallorca,La Liga,opponent,33,38,648,351,257,304,87,244,612,39.9,368,377,121,256,306,954,746,10,https://fbref.com/en/squads/2aa12281/2021-2022/Mallorca-Stats
+2022,Osasuna,La Liga,team,29,38,577,331,270,236,71,251,598,42,347,340,115,225,368,945,758,5,https://fbref.com/en/squads/03c57e2b/2021-2022/Osasuna-Stats
+2022,Osasuna,La Liga,opponent,29,38,515,326,265,204,46,206,467,44.1,261,355,99,256,353,868,843,15,https://fbref.com/en/squads/03c57e2b/2021-2022/Osasuna-Stats
+2022,Rayo Vallecano,La Liga,team,28,38,621,359,320,237,64,280,688,40.7,408,410,95,315,365,986,686,9,https://fbref.com/en/squads/98e8af82/2021-2022/Rayo-Vallecano-Stats
+2022,Rayo Vallecano,La Liga,opponent,28,38,653,391,304,274,75,282,639,44.1,357,400,130,270,343,996,711,15,https://fbref.com/en/squads/98e8af82/2021-2022/Rayo-Vallecano-Stats
+2022,Real Madrid,La Liga,team,31,38,560,345,281,195,84,211,502,42,291,379,114,265,334,894,526,17,https://fbref.com/en/squads/53a2f082/2021-2022/Real-Madrid-Stats
+2022,Real Madrid,La Liga,opponent,31,38,601,346,347,159,95,324,780,41.5,456,443,161,282,342,943,696,16,https://fbref.com/en/squads/53a2f082/2021-2022/Real-Madrid-Stats
+2022,Real Sociedad,La Liga,team,32,38,586,339,271,234,81,260,546,47.6,286,382,105,277,348,934,703,6,https://fbref.com/en/squads/e31d1cd9/2021-2022/Real-Sociedad-Stats
+2022,Real Sociedad,La Liga,opponent,32,38,701,415,344,276,81,310,670,46.3,360,424,117,307,339,1040,693,9,https://fbref.com/en/squads/e31d1cd9/2021-2022/Real-Sociedad-Stats
+2022,Sevilla,La Liga,team,33,38,534,302,252,211,71,236,542,43.5,306,367,124,243,270,804,603,18,https://fbref.com/en/squads/ad2be733/2021-2022/Sevilla-Stats
+2022,Sevilla,La Liga,opponent,33,38,609,353,312,203,94,283,588,48.1,305,344,91,253,348,957,748,8,https://fbref.com/en/squads/ad2be733/2021-2022/Sevilla-Stats
+2022,Valencia,La Liga,team,34,38,591,364,289,217,85,266,623,42.7,357,373,93,280,339,930,746,8,https://fbref.com/en/squads/dcc91a7b/2021-2022/Valencia-Stats
+2022,Valencia,La Liga,opponent,34,38,576,335,299,211,66,282,642,43.9,360,314,90,224,286,862,795,7,https://fbref.com/en/squads/dcc91a7b/2021-2022/Valencia-Stats
+2022,Villarreal,La Liga,team,29,38,538,312,250,197,91,229,476,48.1,247,330,109,221,329,867,644,16,https://fbref.com/en/squads/2a8183b3/2021-2022/Villarreal-Stats
+2022,Villarreal,La Liga,opponent,29,38,628,380,310,234,84,296,746,39.7,450,469,112,357,387,1015,690,11,https://fbref.com/en/squads/2a8183b3/2021-2022/Villarreal-Stats
+2023,Almería,La Liga,team,29,38,557,322,292,202,63,280,623,44.9,343,435,122,313,322,879,855,13,https://fbref.com/en/squads/78ecf4bb/2022-2023/Almeria-Stats
+2023,Almería,La Liga,opponent,29,38,591,369,274,233,84,310,605,51.2,295,373,108,265,249,840,553,14,https://fbref.com/en/squads/78ecf4bb/2022-2023/Almeria-Stats
+2023,Athletic Club,La Liga,team,26,38,608,369,267,254,87,322,642,50.2,320,415,95,320,310,918,598,14,https://fbref.com/en/squads/2b390eca/2022-2023/Athletic-Club-Stats
+2023,Athletic Club,La Liga,opponent,26,38,656,418,374,212,70,305,652,46.8,347,449,147,302,384,1040,839,17,https://fbref.com/en/squads/2b390eca/2022-2023/Athletic-Club-Stats
+2023,Atlético Madrid,La Liga,team,27,38,667,408,332,245,90,334,685,48.8,351,396,103,293,304,971,704,9,https://fbref.com/en/squads/db3b9613/2022-2023/Atletico-Madrid-Stats
+2023,Atlético Madrid,La Liga,opponent,27,38,539,317,271,181,87,262,584,44.9,322,445,134,311,368,907,663,14,https://fbref.com/en/squads/db3b9613/2022-2023/Atletico-Madrid-Stats
+2023,Barcelona,La Liga,team,29,38,522,324,211,216,95,227,496,45.8,269,353,82,271,253,775,439,17,https://fbref.com/en/squads/206d90db/2022-2023/Barcelona-Stats
+2023,Barcelona,La Liga,opponent,29,38,647,385,332,250,65,321,717,44.8,396,423,139,284,369,1016,746,17,https://fbref.com/en/squads/206d90db/2022-2023/Barcelona-Stats
+2023,Betis,La Liga,team,30,38,665,421,373,238,54,338,701,48.2,363,411,112,299,364,1029,857,7,https://fbref.com/en/squads/fc536746/2022-2023/Real-Betis-Stats
+2023,Betis,La Liga,opponent,30,38,664,417,303,268,93,311,676,46,365,437,95,342,325,989,584,9,https://fbref.com/en/squads/fc536746/2022-2023/Real-Betis-Stats
+2023,Celta Vigo,La Liga,team,26,38,664,413,319,269,76,295,676,43.6,381,393,84,309,368,1032,666,5,https://fbref.com/en/squads/f25da7fb/2022-2023/Celta-Vigo-Stats
+2023,Celta Vigo,La Liga,opponent,26,38,593,356,314,204,75,295,618,47.7,323,369,121,248,394,987,681,9,https://fbref.com/en/squads/f25da7fb/2022-2023/Celta-Vigo-Stats
+2023,Cádiz,La Liga,team,38,38,623,410,358,205,60,320,671,47.7,351,425,128,297,270,893,853,13,https://fbref.com/en/squads/ee7c297c/2022-2023/Cadiz-Stats
+2023,Cádiz,La Liga,opponent,38,38,603,374,255,249,99,249,495,50.3,246,347,87,260,242,845,727,10,https://fbref.com/en/squads/ee7c297c/2022-2023/Cadiz-Stats
+2023,Elche,La Liga,team,32,38,633,363,367,212,54,280,603,46.4,323,413,131,282,323,956,766,13,https://fbref.com/en/squads/6c8b07df/2022-2023/Elche-Stats
+2023,Elche,La Liga,opponent,32,38,656,402,293,265,98,311,653,47.6,342,418,97,321,288,944,698,9,https://fbref.com/en/squads/6c8b07df/2022-2023/Elche-Stats
+2023,Espanyol,La Liga,team,33,38,652,379,330,239,83,301,600,50.2,299,416,134,282,338,990,788,9,https://fbref.com/en/squads/a8661628/2022-2023/Espanyol-Stats
+2023,Espanyol,La Liga,opponent,33,38,505,326,239,220,46,260,517,50.3,257,328,100,228,238,743,822,10,https://fbref.com/en/squads/a8661628/2022-2023/Espanyol-Stats
+2023,Getafe,La Liga,team,25,38,541,339,282,199,60,285,619,46,334,404,113,291,320,861,794,10,https://fbref.com/en/squads/7848bd64/2022-2023/Getafe-Stats
+2023,Getafe,La Liga,opponent,25,38,457,290,211,190,56,189,406,46.6,217,378,95,283,300,757,723,14,https://fbref.com/en/squads/7848bd64/2022-2023/Getafe-Stats
+2023,Girona,La Liga,team,29,38,551,321,271,213,67,244,532,45.9,288,379,111,268,266,817,662,20,https://fbref.com/en/squads/9024a00a/2022-2023/Girona-Stats
+2023,Girona,La Liga,opponent,29,38,641,415,289,265,87,311,652,47.7,341,359,78,281,304,945,659,10,https://fbref.com/en/squads/9024a00a/2022-2023/Girona-Stats
+2023,Mallorca,La Liga,team,31,38,583,345,318,213,52,283,581,48.7,298,402,146,256,319,902,859,7,https://fbref.com/en/squads/2aa12281/2022-2023/Mallorca-Stats
+2023,Mallorca,La Liga,opponent,31,38,500,296,202,217,81,198,491,40.3,293,333,82,251,231,731,621,8,https://fbref.com/en/squads/2aa12281/2022-2023/Mallorca-Stats
+2023,Osasuna,La Liga,team,26,38,534,328,256,196,82,266,588,45.2,322,392,97,295,315,849,749,10,https://fbref.com/en/squads/03c57e2b/2022-2023/Osasuna-Stats
+2023,Osasuna,La Liga,opponent,26,38,563,332,318,195,50,247,560,44.1,313,381,93,288,311,874,797,7,https://fbref.com/en/squads/03c57e2b/2022-2023/Osasuna-Stats
+2023,Rayo Vallecano,La Liga,team,28,38,636,393,262,276,98,281,664,42.3,383,428,92,336,309,945,680,11,https://fbref.com/en/squads/98e8af82/2022-2023/Rayo-Vallecano-Stats
+2023,Rayo Vallecano,La Liga,opponent,28,38,664,391,317,278,69,290,586,49.5,296,416,133,283,345,1009,810,10,https://fbref.com/en/squads/98e8af82/2022-2023/Rayo-Vallecano-Stats
+2023,Real Madrid,La Liga,team,26,38,542,353,242,212,88,259,565,45.8,306,365,105,260,296,838,469,5,https://fbref.com/en/squads/53a2f082/2022-2023/Real-Madrid-Stats
+2023,Real Madrid,La Liga,opponent,26,38,676,408,377,218,81,379,854,44.4,475,492,175,317,331,1007,678,8,https://fbref.com/en/squads/53a2f082/2022-2023/Real-Madrid-Stats
+2023,Real Sociedad,La Liga,team,30,38,660,395,304,254,102,285,613,46.5,328,399,103,296,271,931,624,13,https://fbref.com/en/squads/e31d1cd9/2022-2023/Real-Sociedad-Stats
+2023,Real Sociedad,La Liga,opponent,30,38,661,403,341,237,83,293,600,48.8,307,402,110,292,325,986,613,15,https://fbref.com/en/squads/e31d1cd9/2022-2023/Real-Sociedad-Stats
+2023,Sevilla,La Liga,team,35,38,587,367,261,230,96,281,591,47.5,310,361,127,234,339,926,633,9,https://fbref.com/en/squads/ad2be733/2022-2023/Sevilla-Stats
+2023,Sevilla,La Liga,opponent,35,38,569,353,273,206,90,257,526,48.9,269,358,96,262,271,840,769,13,https://fbref.com/en/squads/ad2be733/2022-2023/Sevilla-Stats
+2023,Valencia,La Liga,team,28,38,678,430,340,254,84,311,645,48.2,334,370,75,295,288,966,643,21,https://fbref.com/en/squads/dcc91a7b/2022-2023/Valencia-Stats
+2023,Valencia,La Liga,opponent,28,38,645,382,354,219,72,307,658,46.7,351,418,133,285,294,939,834,15,https://fbref.com/en/squads/dcc91a7b/2022-2023/Valencia-Stats
+2023,Valladolid,La Liga,team,36,38,671,396,334,251,86,296,628,47.1,332,432,149,283,345,1016,767,8,https://fbref.com/en/squads/17859612/2022-2023/Valladolid-Stats
+2023,Valladolid,La Liga,opponent,36,38,634,389,309,232,93,318,627,50.7,309,409,97,312,264,898,662,5,https://fbref.com/en/squads/17859612/2022-2023/Valladolid-Stats
+2023,Villarreal,La Liga,team,32,38,578,370,276,201,101,270,534,50.6,264,372,125,247,262,840,691,16,https://fbref.com/en/squads/2a8183b3/2022-2023/Villarreal-Stats
+2023,Villarreal,La Liga,opponent,32,38,688,423,349,240,99,345,780,44.2,435,426,114,312,349,1037,618,16,https://fbref.com/en/squads/2a8183b3/2022-2023/Villarreal-Stats
+2024,Alavés,La Liga,team,30,38,578,347,284,227,67,290,629,46.1,339,363,117,246,279,857,810,5,https://fbref.com/en/squads/8d6fd021/Alaves-Stats
+2024,Alavés,La Liga,opponent,30,38,553,340,279,216,58,254,564,45,310,393,115,278,233,786,802,14,https://fbref.com/en/squads/8d6fd021/Alaves-Stats
+2024,Almería,La Liga,team,35,38,633,372,354,222,57,280,582,48.1,302,430,134,296,313,946,856,19,https://fbref.com/en/squads/78ecf4bb/Almeria-Stats
+2024,Almería,La Liga,opponent,35,38,583,364,249,236,98,314,613,51.2,299,357,103,254,280,863,676,15,https://fbref.com/en/squads/78ecf4bb/Almeria-Stats
+2024,Athletic Club,La Liga,team,27,38,581,362,217,264,100,305,635,48,330,419,106,313,278,859,631,4,https://fbref.com/en/squads/2b390eca/Athletic-Club-Stats
+2024,Athletic Club,La Liga,opponent,27,38,715,428,371,284,60,349,687,50.8,338,411,119,292,370,1085,843,27,https://fbref.com/en/squads/2b390eca/Athletic-Club-Stats
+2024,Atlético Madrid,La Liga,team,27,38,654,399,308,263,83,327,671,48.7,344,460,114,346,256,910,793,8,https://fbref.com/en/squads/db3b9613/Atletico-Madrid-Stats
+2024,Atlético Madrid,La Liga,opponent,27,38,530,318,257,182,91,227,524,43.3,297,407,104,303,298,828,735,17,https://fbref.com/en/squads/db3b9613/Atletico-Madrid-Stats
+2024,Barcelona,La Liga,team,29,38,571,363,271,223,77,243,523,46.5,280,363,97,266,257,828,573,17,https://fbref.com/en/squads/206d90db/Barcelona-Stats
+2024,Barcelona,La Liga,opponent,29,38,643,392,333,227,83,338,722,46.8,384,450,159,291,318,961,770,10,https://fbref.com/en/squads/206d90db/Barcelona-Stats
+2024,Betis,La Liga,team,35,38,692,440,305,300,87,358,683,52.4,325,422,101,321,345,1037,801,9,https://fbref.com/en/squads/fc536746/Real-Betis-Stats
+2024,Betis,La Liga,opponent,35,38,756,464,337,343,76,329,715,46,386,484,144,340,314,1070,693,13,https://fbref.com/en/squads/fc536746/Real-Betis-Stats
+2024,Celta Vigo,La Liga,team,31,38,627,382,302,243,82,308,662,46.5,354,434,116,318,297,924,832,9,https://fbref.com/en/squads/f25da7fb/Celta-Vigo-Stats
+2024,Celta Vigo,La Liga,opponent,31,38,627,382,309,254,64,291,586,49.7,295,444,125,319,335,962,721,8,https://fbref.com/en/squads/f25da7fb/Celta-Vigo-Stats
+2024,Cádiz,La Liga,team,34,38,671,398,338,264,69,341,728,46.8,387,443,123,320,298,969,786,13,https://fbref.com/en/squads/ee7c297c/Cadiz-Stats
+2024,Cádiz,La Liga,opponent,34,38,606,370,281,253,72,263,493,53.3,230,341,89,252,243,849,795,7,https://fbref.com/en/squads/ee7c297c/Cadiz-Stats
+2024,Getafe,La Liga,team,33,38,608,364,269,251,88,291,577,50.4,286,342,103,239,307,915,730,6,https://fbref.com/en/squads/7848bd64/Getafe-Stats
+2024,Getafe,La Liga,opponent,33,38,540,348,267,228,45,260,499,52.1,239,382,113,269,261,801,855,17,https://fbref.com/en/squads/7848bd64/Getafe-Stats
+2024,Girona,La Liga,team,25,38,544,340,264,222,58,274,521,52.6,247,378,124,254,257,801,661,21,https://fbref.com/en/squads/9024a00a/Girona-Stats
+2024,Girona,La Liga,opponent,25,38,670,423,313,235,122,296,647,45.7,351,374,104,270,301,971,630,10,https://fbref.com/en/squads/9024a00a/Girona-Stats
+2024,Granada,La Liga,team,40,38,634,374,334,237,63,288,620,46.5,332,404,110,294,280,914,779,26,https://fbref.com/en/squads/a0435291/Granada-Stats
+2024,Granada,La Liga,opponent,40,38,601,344,270,262,69,296,599,49.4,303,390,106,284,290,891,729,11,https://fbref.com/en/squads/a0435291/Granada-Stats
+2024,Las Palmas,La Liga,team,29,38,662,397,328,263,71,305,633,48.2,328,416,98,318,281,943,761,14,https://fbref.com/en/squads/0049d422/Las-Palmas-Stats
+2024,Las Palmas,La Liga,opponent,29,38,673,415,301,301,71,308,624,49.4,316,426,99,327,335,1008,656,7,https://fbref.com/en/squads/0049d422/Las-Palmas-Stats
+2024,Mallorca,La Liga,team,25,38,686,388,347,281,58,340,657,51.8,317,369,131,238,365,1051,785,10,https://fbref.com/en/squads/2aa12281/Mallorca-Stats
+2024,Mallorca,La Liga,opponent,25,38,532,318,237,231,64,219,470,46.6,251,375,108,267,295,827,814,10,https://fbref.com/en/squads/2aa12281/Mallorca-Stats
+2024,Osasuna,La Liga,team,29,38,525,311,247,201,77,243,517,47,274,400,108,292,263,788,756,16,https://fbref.com/en/squads/03c57e2b/Osasuna-Stats
+2024,Osasuna,La Liga,opponent,29,38,530,339,286,187,57,247,484,51,237,411,101,310,291,821,903,9,https://fbref.com/en/squads/03c57e2b/Osasuna-Stats
+2024,Rayo Vallecano,La Liga,team,26,38,630,372,279,282,69,270,608,44.4,338,410,105,305,308,938,796,12,https://fbref.com/en/squads/98e8af82/Rayo-Vallecano-Stats
+2024,Rayo Vallecano,La Liga,opponent,26,38,679,408,314,284,81,306,589,52,283,388,119,269,285,964,759,17,https://fbref.com/en/squads/98e8af82/Rayo-Vallecano-Stats
+2024,Real Madrid,La Liga,team,27,38,557,368,252,214,91,225,461,48.8,236,401,104,297,296,853,552,14,https://fbref.com/en/squads/53a2f082/Real-Madrid-Stats
+2024,Real Madrid,La Liga,opponent,27,38,705,389,393,221,91,393,794,49.5,401,402,146,256,296,1001,689,16,https://fbref.com/en/squads/53a2f082/Real-Madrid-Stats
+2024,Real Sociedad,La Liga,team,31,38,650,405,271,285,94,283,552,51.3,269,405,118,287,253,903,693,15,https://fbref.com/en/squads/e31d1cd9/Real-Sociedad-Stats
+2024,Real Sociedad,La Liga,opponent,31,38,635,368,305,268,62,284,605,46.9,321,402,112,290,278,913,803,9,https://fbref.com/en/squads/e31d1cd9/Real-Sociedad-Stats
+2024,Sevilla,La Liga,team,35,38,697,463,380,237,80,335,626,53.5,291,395,123,272,313,1010,772,9,https://fbref.com/en/squads/ad2be733/Sevilla-Stats
+2024,Sevilla,La Liga,opponent,35,38,558,347,247,240,71,278,570,48.8,292,367,88,279,236,794,895,10,https://fbref.com/en/squads/ad2be733/Sevilla-Stats
+2024,Valencia,La Liga,team,29,38,657,379,335,250,72,309,618,50,309,392,105,287,324,981,842,9,https://fbref.com/en/squads/dcc91a7b/Valencia-Stats
+2024,Valencia,La Liga,opponent,29,38,612,379,293,231,88,294,570,51.6,276,406,87,319,269,881,646,10,https://fbref.com/en/squads/dcc91a7b/Valencia-Stats
+2024,Villarreal,La Liga,team,32,38,576,348,288,212,76,260,532,48.9,272,386,130,256,304,880,789,12,https://fbref.com/en/squads/2a8183b3/Villarreal-Stats
+2024,Villarreal,La Liga,opponent,32,38,685,436,331,258,96,329,680,48.4,351,422,126,296,346,1031,584,11,https://fbref.com/en/squads/2a8183b3/Villarreal-Stats
+2025,Alavés,La Liga,team,24,9,163,101,76,67,20,80,159,50.3,79,77,19,58,78,241,160,2,https://fbref.com/en/squads/8d6fd021/Alaves-Stats
+2025,Alavés,La Liga,opponent,24,9,125,74,58,53,14,63,104,60.6,41,92,30,62,69,194,218,6,https://fbref.com/en/squads/8d6fd021/Alaves-Stats
+2025,Athletic Club,La Liga,team,26,9,120,69,47,61,12,63,139,45.3,76,81,24,57,93,213,209,7,https://fbref.com/en/squads/2b390eca/Athletic-Club-Stats
+2025,Athletic Club,La Liga,opponent,26,9,184,106,94,74,16,90,171,52.6,81,66,20,46,78,262,178,5,https://fbref.com/en/squads/2b390eca/Athletic-Club-Stats
+2025,Atlético Madrid,La Liga,team,22,9,136,80,79,45,12,77,151,51,74,82,19,63,64,200,201,5,https://fbref.com/en/squads/db3b9613/Atletico-Madrid-Stats
+2025,Atlético Madrid,La Liga,opponent,22,9,109,73,49,43,17,55,109,50.5,54,103,28,75,82,191,177,7,https://fbref.com/en/squads/db3b9613/Atletico-Madrid-Stats
+2025,Barcelona,La Liga,team,24,9,136,85,45,67,24,64,116,55.2,52,69,16,53,43,179,157,5,https://fbref.com/en/squads/206d90db/Barcelona-Stats
+2025,Barcelona,La Liga,opponent,24,9,161,102,91,53,17,88,192,45.8,104,118,43,75,75,236,205,6,https://fbref.com/en/squads/206d90db/Barcelona-Stats
+2025,Betis,La Liga,team,24,9,148,89,73,51,24,78,154,50.6,76,97,28,69,73,221,173,4,https://fbref.com/en/squads/fc536746/Real-Betis-Stats
+2025,Betis,La Liga,opponent,24,9,168,99,91,59,18,73,148,49.3,75,106,30,76,78,246,198,4,https://fbref.com/en/squads/fc536746/Real-Betis-Stats
+2025,Celta Vigo,La Liga,team,24,9,119,68,58,50,11,60,122,49.2,62,86,33,53,68,187,193,3,https://fbref.com/en/squads/f25da7fb/Celta-Vigo-Stats
+2025,Celta Vigo,La Liga,opponent,24,9,136,89,65,57,14,64,128,50,64,101,26,75,88,224,165,2,https://fbref.com/en/squads/f25da7fb/Celta-Vigo-Stats
+2025,Espanyol,La Liga,team,21,9,159,105,94,55,10,62,137,45.3,75,116,47,69,68,227,278,6,https://fbref.com/en/squads/a8661628/Espanyol-Stats
+2025,Espanyol,La Liga,opponent,21,9,116,85,52,50,14,62,109,56.9,47,89,25,64,84,200,136,3,https://fbref.com/en/squads/a8661628/Espanyol-Stats
+2025,Getafe,La Liga,team,22,9,167,97,84,61,22,80,166,48.2,86,89,18,71,51,218,209,3,https://fbref.com/en/squads/7848bd64/Getafe-Stats
+2025,Getafe,La Liga,opponent,22,9,183,109,105,54,24,87,155,56.1,68,80,37,43,61,244,284,3,https://fbref.com/en/squads/7848bd64/Getafe-Stats
+2025,Girona,La Liga,team,23,9,154,92,71,62,21,77,140,55,63,99,23,76,66,220,142,4,https://fbref.com/en/squads/9024a00a/Girona-Stats
+2025,Girona,La Liga,opponent,23,9,165,93,78,59,28,73,151,48.3,78,89,26,63,67,232,194,4,https://fbref.com/en/squads/9024a00a/Girona-Stats
+2025,Las Palmas,La Liga,team,27,9,138,86,71,55,12,73,154,47.4,81,88,25,63,70,208,174,2,https://fbref.com/en/squads/0049d422/Las-Palmas-Stats
+2025,Las Palmas,La Liga,opponent,27,9,129,81,56,61,12,61,127,48,66,102,25,77,91,220,207,0,https://fbref.com/en/squads/0049d422/Las-Palmas-Stats
+2025,Leganés,La Liga,team,23,9,166,108,76,76,14,73,139,52.5,66,97,28,69,85,251,266,1,https://fbref.com/en/squads/7c6f2c78/Leganes-Stats
+2025,Leganés,La Liga,opponent,23,9,124,75,48,56,20,54,117,46.2,63,76,20,56,75,199,175,2,https://fbref.com/en/squads/7c6f2c78/Leganes-Stats
+2025,Mallorca,La Liga,team,22,9,145,91,82,41,22,60,116,51.7,56,86,28,58,79,224,255,3,https://fbref.com/en/squads/2aa12281/Mallorca-Stats
+2025,Mallorca,La Liga,opponent,22,9,155,95,78,59,18,61,127,48,66,84,21,63,73,228,215,3,https://fbref.com/en/squads/2aa12281/Mallorca-Stats
+2025,Osasuna,La Liga,team,22,9,161,92,69,72,20,75,149,50.3,74,108,27,81,67,228,226,3,https://fbref.com/en/squads/03c57e2b/Osasuna-Stats
+2025,Osasuna,La Liga,opponent,22,9,142,93,71,58,13,65,132,49.2,67,77,18,59,55,197,233,2,https://fbref.com/en/squads/03c57e2b/Osasuna-Stats
+2025,Rayo Vallecano,La Liga,team,22,9,151,101,75,58,18,70,154,45.5,84,87,33,54,87,238,222,1,https://fbref.com/en/squads/98e8af82/Rayo-Vallecano-Stats
+2025,Rayo Vallecano,La Liga,opponent,22,9,139,92,62,56,21,64,127,50.4,63,109,30,79,56,195,208,5,https://fbref.com/en/squads/98e8af82/Rayo-Vallecano-Stats
+2025,Real Madrid,La Liga,team,21,9,136,89,64,51,21,70,122,57.4,52,91,33,58,85,221,125,3,https://fbref.com/en/squads/53a2f082/Real-Madrid-Stats
+2025,Real Madrid,La Liga,opponent,21,9,168,102,103,51,14,95,198,48,103,119,48,71,81,249,169,5,https://fbref.com/en/squads/53a2f082/Real-Madrid-Stats
+2025,Real Sociedad,La Liga,team,26,9,151,90,70,59,22,69,125,55.2,56,103,33,70,54,205,184,6,https://fbref.com/en/squads/e31d1cd9/Real-Sociedad-Stats
+2025,Real Sociedad,La Liga,opponent,26,9,144,95,77,47,20,64,126,50.8,62,82,20,62,64,208,230,2,https://fbref.com/en/squads/e31d1cd9/Real-Sociedad-Stats
+2025,Sevilla,La Liga,team,25,9,153,93,82,46,25,68,113,60.2,45,82,22,60,75,228,177,3,https://fbref.com/en/squads/ad2be733/Sevilla-Stats
+2025,Sevilla,La Liga,opponent,25,9,180,95,87,73,20,79,179,44.1,100,94,31,63,74,254,187,6,https://fbref.com/en/squads/ad2be733/Sevilla-Stats
+2025,Valencia,La Liga,team,23,9,148,97,70,54,24,61,128,47.7,67,89,25,64,61,209,173,3,https://fbref.com/en/squads/dcc91a7b/Valencia-Stats
+2025,Valencia,La Liga,opponent,23,9,148,87,65,73,10,78,131,59.5,53,104,21,83,50,198,220,1,https://fbref.com/en/squads/dcc91a7b/Valencia-Stats
+2025,Valladolid,La Liga,team,26,9,152,94,86,54,12,70,157,44.6,87,114,43,71,77,229,178,5,https://fbref.com/en/squads/17859612/Valladolid-Stats
+2025,Valladolid,La Liga,opponent,26,9,137,84,56,53,28,57,130,43.8,73,78,29,49,54,191,166,1,https://fbref.com/en/squads/17859612/Valladolid-Stats
+2025,Villarreal,La Liga,team,23,9,137,83,72,47,18,67,142,47.2,75,106,33,73,70,207,206,2,https://fbref.com/en/squads/2a8183b3/Villarreal-Stats
+2025,Villarreal,La Liga,opponent,23,9,127,81,58,43,26,64,122,52.5,58,78,29,49,59,186,143,4,https://fbref.com/en/squads/2a8183b3/Villarreal-Stats
