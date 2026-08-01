@@ -5,6 +5,24 @@ DEFAULT_K = 20.0
 DEFAULT_HOME_ADVANTAGE = 100.0
 DEFAULT_PLAYER_K = 16.0
 DEFAULT_PLAYER_BONUS_WEIGHT = 8.0
+DEFAULT_BASE_RATING = 1500.0
+DEFAULT_REGRESSION_FACTOR = 0.75
+
+
+def seed_rating(
+    previous_rating: float,
+    base_rating: float = DEFAULT_BASE_RATING,
+    regression_factor: float = DEFAULT_REGRESSION_FACTOR,
+) -> float:
+    """Rating inicial de una temporada nueva a partir del rating final de la anterior.
+
+    Aplica una regresion leve a la media (`regression_factor` < 1) en vez de heredar el
+    rating tal cual: los cambios de plantilla en el mercado de verano hacen que la fuerza
+    real de un equipo/jugador no sea identica a como termino la temporada pasada, pero
+    resetear a `base_rating` del todo (regression_factor=0) perderia toda la señal
+    acumulada. `regression_factor=1.0` hereda el rating sin ningun ajuste.
+    """
+    return base_rating + regression_factor * (previous_rating - base_rating)
 
 
 def expected_score(rating_a: float, rating_b: float, rating_a_adjustment: float = 0.0) -> float:
