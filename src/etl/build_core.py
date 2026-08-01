@@ -141,13 +141,19 @@ def build_player_match_stats(competition: str, season: str) -> int:
 
 
 def build_market_values() -> tuple[int, int]:
-    """Cruza core.players (poblado desde Understat) con la última foto de
-    staging.transfermarkt_players por nombre normalizado (sin acentos/guiones). Primero
-    intenta match exacto; si no es único, cae a contención de substring en cualquier
-    sentido (ej. 'Kylian Mbappe' encaja con 'Kylian Mbappe Lottin'), pero sólo si hay
-    EXACTAMENTE un candidato sin reclamar todavía — si hay 0 o varios candidatos posibles,
-    se descarta en vez de arriesgar un cruce incorrecto (core.players.tm_player_id es
-    UNIQUE, así que un mismo tm_player_id no puede asignarse a dos jugadores).
+    """Cruza core.players (poblado desde Understat) con staging.transfermarkt_players por
+    nombre normalizado (sin acentos/guiones). Primero intenta match exacto; si no es
+    único, cae a contención de substring en cualquier sentido (ej. 'Kylian Mbappe' encaja
+    con 'Kylian Mbappe Lottin'), pero sólo si hay EXACTAMENTE un candidato sin reclamar
+    todavía — si hay 0 o varios candidatos posibles, se descarta en vez de arriesgar un
+    cruce incorrecto (core.players.tm_player_id es UNIQUE, así que un mismo tm_player_id
+    no puede asignarse a dos jugadores).
+
+    El nombre usado para decidir el match es siempre el más reciente de cada tm_player_id
+    (por si cambia ligeramente de una temporada a otra), pero una vez decidido el cruce se
+    guarda un valor de mercado por CADA temporada/valued_at disponible de ese tm_player_id,
+    no solo el más reciente — si no, calcular una temporada histórica no serviría de nada
+    porque sólo se conservaría el snapshot más nuevo.
 
     Nombres que no casan quedan sin valor de mercado en esta iteración; matching más
     robusto (fecha de nacimiento, fuzzy matching) queda como mejora futura.
@@ -157,14 +163,23 @@ def build_market_values() -> tuple[int, int]:
     engine = get_engine()
     with engine.connect() as conn:
         players = conn.execute(text("SELECT id, canonical_name FROM core.players")).fetchall()
-        tm_players = conn.execute(
+        tm_latest = conn.execute(
             text(
                 """
                 SELECT DISTINCT ON (tm_player_id)
-                    tm_player_id, name, nationality, market_value_eur, valued_at
+                    tm_player_id, name, nationality
                 FROM staging.transfermarkt_players
                 WHERE market_value_eur IS NOT NULL
                 ORDER BY tm_player_id, valued_at DESC
+                """
+            )
+        ).fetchall()
+        tm_all_values = conn.execute(
+            text(
+                """
+                SELECT tm_player_id, market_value_eur, valued_at
+                FROM staging.transfermarkt_players
+                WHERE market_value_eur IS NOT NULL
                 """
             )
         ).fetchall()
@@ -172,12 +187,12 @@ def build_market_values() -> tuple[int, int]:
     normalized_players = [(p.id, _normalize_name(p.canonical_name)) for p in players]
 
     claimed_player_ids: set[int] = set()
-    market_value_rows = []
+    player_id_by_tm_id: dict[str, int] = {}
     player_update_rows = []
 
     exact_matches = []
     substring_candidates = []
-    for tm in tm_players:
+    for tm in tm_latest:
         tm_norm = _normalize_name(tm.name)
         exact = [pid for pid, norm in normalized_players if norm == tm_norm]
         if len(exact) == 1:
@@ -189,9 +204,7 @@ def build_market_values() -> tuple[int, int]:
         if player_id in claimed_player_ids:
             continue
         claimed_player_ids.add(player_id)
-        market_value_rows.append(
-            {"player_id": player_id, "valued_at": tm.valued_at, "market_value_eur": tm.market_value_eur}
-        )
+        player_id_by_tm_id[tm.tm_player_id] = player_id
         player_update_rows.append(
             {"player_id": player_id, "tm_player_id": tm.tm_player_id, "nationality": tm.nationality}
         )
@@ -206,14 +219,22 @@ def build_market_values() -> tuple[int, int]:
             continue
         player_id = candidates[0]
         claimed_player_ids.add(player_id)
-        market_value_rows.append(
-            {"player_id": player_id, "valued_at": tm.valued_at, "market_value_eur": tm.market_value_eur}
-        )
+        player_id_by_tm_id[tm.tm_player_id] = player_id
         player_update_rows.append(
             {"player_id": player_id, "tm_player_id": tm.tm_player_id, "nationality": tm.nationality}
         )
 
     matched = len(claimed_player_ids)
+
+    market_value_rows = [
+        {
+            "player_id": player_id_by_tm_id[tm.tm_player_id],
+            "valued_at": tm.valued_at,
+            "market_value_eur": tm.market_value_eur,
+        }
+        for tm in tm_all_values
+        if tm.tm_player_id in player_id_by_tm_id
+    ]
 
     engine = get_engine()
     with engine.begin() as conn:
