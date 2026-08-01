@@ -58,6 +58,11 @@ def load_features(competition: str, season: str) -> pd.DataFrame:
 
 
 def store_valuation(df: pd.DataFrame, competition: str, season: str) -> None:
+    """El ON CONFLICT (player_id, season) sobreescribe jugadores que siguen calificando,
+    pero no limpia una fila de una corrida anterior de un jugador que YA NO califica en
+    esta ejecucion (ej. cayo por debajo de MIN_MINUTES tras recalcular) -- por eso se
+    borra primero todo lo de esta competicion/temporada antes de insertar el resultado
+    completo, igual que ya hacen compute_similarity/compute_team_style."""
     rows = [
         {
             "player_id": row.player_id,
@@ -72,11 +77,15 @@ def store_valuation(df: pd.DataFrame, competition: str, season: str) -> None:
         }
         for row in df.itertuples()
     ]
-    if not rows:
-        return
 
     engine = get_engine()
     with engine.begin() as conn:
+        conn.execute(
+            text("DELETE FROM marts.player_valuation WHERE competition = :competition AND season = :season"),
+            {"competition": competition, "season": season},
+        )
+        if not rows:
+            return
         conn.execute(
             text(
                 """
