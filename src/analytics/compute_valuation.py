@@ -87,9 +87,8 @@ def store_valuation(df: pd.DataFrame, competition: str, season: str) -> None:
                     :player_id, :competition, :season, :age, :minutes, :market_value_eur,
                     :predicted_value_eur, :value_gap_eur, :value_gap_pct
                 )
-                ON CONFLICT (player_id) DO UPDATE SET
+                ON CONFLICT (player_id, season) DO UPDATE SET
                     competition = EXCLUDED.competition,
-                    season = EXCLUDED.season,
                     age = EXCLUDED.age,
                     minutes = EXCLUDED.minutes,
                     market_value_eur = EXCLUDED.market_value_eur,

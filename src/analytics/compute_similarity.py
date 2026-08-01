@@ -31,20 +31,27 @@ def load_features(competition: str, season: str) -> pd.DataFrame:
     )
 
 
-def store_similarity(pairs: pd.DataFrame) -> None:
+def store_similarity(pairs: pd.DataFrame, competition: str, season: str) -> None:
+    """Reemplaza solo las filas de esta competicion/temporada, para no tocar otras
+    temporadas ya calculadas (antes se hacia TRUNCATE de la tabla entera)."""
     engine = get_engine()
     with engine.begin() as conn:
-        conn.execute(text("TRUNCATE marts.player_similarity"))
+        conn.execute(
+            text("DELETE FROM marts.player_similarity WHERE competition = :competition AND season = :season"),
+            {"competition": competition, "season": season},
+        )
         if pairs.empty:
             return
+        rows = pairs.assign(competition=competition, season=season).to_dict(orient="records")
         conn.execute(
             text(
                 """
-                INSERT INTO marts.player_similarity (player_id, similar_player_id, rank, similarity)
-                VALUES (:player_id, :similar_player_id, :rank, :similarity)
+                INSERT INTO marts.player_similarity
+                    (player_id, similar_player_id, rank, similarity, competition, season)
+                VALUES (:player_id, :similar_player_id, :rank, :similarity, :competition, :season)
                 """
             ),
-            pairs.to_dict(orient="records"),
+            rows,
         )
 
 
@@ -52,7 +59,7 @@ def run(competition: str = "La_liga", season: str = "2025") -> None:
     df = load_features(competition, season)
     print(f"Jugadores con datos suficientes (>= {MIN_MINUTES} min): {len(df)}")
     pairs = build_similarity_pairs(df)
-    store_similarity(pairs)
+    store_similarity(pairs, competition, season)
     print(f"marts.player_similarity actualizado: {len(pairs)} filas")
 
 
