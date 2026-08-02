@@ -22,6 +22,12 @@ NEUTRAL_GRAY = "#c3c2b7"
 # el dashboard muestra solo la vigente hasta que se construya un selector de temporada.
 CURRENT_SEASON = "2025"
 
+
+def season_label(season: str) -> str:
+    """'2025' (el año de inicio, como se guarda en la base de datos) -> '2025/2026' (como
+    se conoce la temporada realmente) para mostrar en la UI."""
+    return f"{season}/{int(season) + 1}"
+
 st.set_page_config(page_title="Football Analytics — La Liga", layout="centered")
 
 
@@ -261,7 +267,7 @@ st.caption(
     "no siempre son 20 equipos: en una temporada histórica solo aparecen los que "
     "compitieron esa campaña."
 )
-club_season = st.selectbox("Temporada", load_club_seasons(), key="club_season")
+club_season = st.selectbox("Temporada", load_club_seasons(), format_func=season_label, key="club_season")
 club_df = load_club_rankings(club_season)
 st.altair_chart(ranking_chart(club_df, "team", BLUE, height=24 * len(club_df)), use_container_width=True)
 with st.expander("Ver tabla"):
