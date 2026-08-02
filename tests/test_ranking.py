@@ -60,7 +60,7 @@ def test_player_elo_full_match_outperforming_xg():
     assert rating_after == pytest.approx(1512.0)
 
 
-def test_player_elo_scales_team_component_by_minutes_played():
+def test_player_elo_scales_both_components_by_minutes_played():
     _, delta_full = player_elo_update(
         rating=1500, minutes=90, team_actual=1.0, team_expected=0.5,
         goal_contribution=1, expected_goal_contribution=0.5,
@@ -69,8 +69,25 @@ def test_player_elo_scales_team_component_by_minutes_played():
         rating=1500, minutes=45, team_actual=1.0, team_expected=0.5,
         goal_contribution=1, expected_goal_contribution=0.5,
     )
-    # el componente de rendimiento (4.0) no se pondera por minutos, sólo el de equipo
-    assert delta_full - delta_half == pytest.approx(4.0)
+    # team_component (8 -> 4) y performance_component (4 -> 2) escalan igual por minutos
+    assert delta_full == pytest.approx(12.0)
+    assert delta_half == pytest.approx(6.0)
+
+
+def test_player_elo_short_cameo_does_not_match_a_full_match_performance():
+    # un suplente que entra pocos minutos y anota no debe moverse tanto como un
+    # titular con la misma sobre-actuacion en un partido completo (issue #21: antes
+    # esto daba deltas de +15 para cameos de 8-11 minutos, iguales a una actuacion
+    # completa sobresaliente)
+    _, delta_cameo = player_elo_update(
+        rating=1500, minutes=10, team_actual=1.0, team_expected=0.5,
+        goal_contribution=1, expected_goal_contribution=0.1,
+    )
+    _, delta_full_match = player_elo_update(
+        rating=1500, minutes=90, team_actual=1.0, team_expected=0.5,
+        goal_contribution=1, expected_goal_contribution=0.1,
+    )
+    assert delta_cameo < delta_full_match / 3
 
 
 def test_player_elo_zero_minutes_has_no_team_component():
