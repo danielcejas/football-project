@@ -12,6 +12,7 @@ insertar en core.player_match_stats) en vez de fallar todo el batch.
 
 import sys
 import unicodedata
+from collections import defaultdict
 
 from sqlalchemy import text
 
@@ -140,6 +141,41 @@ def build_player_match_stats(competition: str, season: str) -> int:
     return result.rowcount
 
 
+def _teams_by_player_id(conn) -> dict[int, set[str]]:
+    """Todos los equipos con los que consta cada jugador en staging.understat_players_season
+    (a través de las 3 temporadas), normalizados. Sirve para verificar que un cruce con
+    Transfermarkt no le asigna el valor de mercado de una persona DISTINTA que comparte
+    nombre -- caso real encontrado: dos "Antonio Martinez", uno del filial del Elche y
+    otro (registrado en Transfermarkt como "Toni Martinez", diminutivo de Antonio) del
+    primer equipo del Alaves. El nombre exacto del filial coincidia con el unico
+    "Antonio Martinez" de Understat (el del Alaves) y se le colgaba su valor de mercado
+    (50.000 EUR) sin comprobar que jugaban en equipos distintos."""
+    rows = conn.execute(
+        text(
+            """
+            SELECT p.id AS player_id, ps.team
+            FROM staging.understat_players_season ps
+            JOIN core.players p ON p.understat_player_id = ps.understat_player_id
+            """
+        )
+    ).fetchall()
+    teams: dict[int, set[str]] = defaultdict(set)
+    for row in rows:
+        for team in row.team.split(","):
+            teams[row.player_id].add(_normalize_name(team))
+    return teams
+
+
+def _team_is_compatible(tm_team: str, player_teams: set[str]) -> bool:
+    """Contención, no igualdad exacta: los nombres de equipo no coinciden literal entre
+    fuentes (Understat dice 'Alaves', Transfermarkt guarda 'Deportivo Alaves', construido
+    desde el slug de la URL)."""
+    if not player_teams:
+        return True
+    tm_norm = _normalize_name(tm_team)
+    return any(tm_norm in team or team in tm_norm for team in player_teams)
+
+
 def build_market_values() -> tuple[int, int]:
     """Cruza core.players (poblado desde Understat) con staging.transfermarkt_players por
     nombre normalizado (sin acentos/guiones). Primero intenta match exacto; si no es
@@ -149,14 +185,22 @@ def build_market_values() -> tuple[int, int]:
     cruce incorrecto (core.players.tm_player_id es UNIQUE, así que un mismo tm_player_id
     no puede asignarse a dos jugadores).
 
+    Además, incluso cuando el nombre coincide de forma única, se verifica que el equipo
+    de Transfermarkt sea compatible con algún equipo de Understat de ese jugador
+    (`_team_is_compatible`) antes de aceptar el cruce -- un nombre único no garantiza que
+    sea la misma persona real (ver `_teams_by_player_id`). Si el equipo no encaja, el
+    cruce se descarta del todo (no se reintenta por substring, que sería un criterio aún
+    más laxo y arriesgaría un cruce igual de incorrecto).
+
     El nombre usado para decidir el match es siempre el más reciente de cada tm_player_id
     (por si cambia ligeramente de una temporada a otra), pero una vez decidido el cruce se
     guarda un valor de mercado por CADA temporada/valued_at disponible de ese tm_player_id,
     no solo el más reciente — si no, calcular una temporada histórica no serviría de nada
     porque sólo se conservaría el snapshot más nuevo.
 
-    Nombres que no casan quedan sin valor de mercado en esta iteración; matching más
-    robusto (fecha de nacimiento, fuzzy matching) queda como mejora futura.
+    Nombres que no casan (o casan pero con un equipo incompatible) quedan sin valor de
+    mercado en esta iteración; un diccionario de diminutivos (Toni/Antonio, Fran/Francisco,
+    Kike/Enrique...) queda como mejora futura si se detectan muchos casos así.
 
     Devuelve (jugadores_con_match, valores_insertados).
     """
@@ -167,7 +211,7 @@ def build_market_values() -> tuple[int, int]:
             text(
                 """
                 SELECT DISTINCT ON (tm_player_id)
-                    tm_player_id, name, nationality
+                    tm_player_id, name, team, nationality
                 FROM staging.transfermarkt_players
                 WHERE market_value_eur IS NOT NULL
                 ORDER BY tm_player_id, valued_at DESC
@@ -183,6 +227,7 @@ def build_market_values() -> tuple[int, int]:
                 """
             )
         ).fetchall()
+        teams_by_player_id = _teams_by_player_id(conn)
 
     normalized_players = [(p.id, _normalize_name(p.canonical_name)) for p in players]
 
@@ -196,7 +241,11 @@ def build_market_values() -> tuple[int, int]:
         tm_norm = _normalize_name(tm.name)
         exact = [pid for pid, norm in normalized_players if norm == tm_norm]
         if len(exact) == 1:
-            exact_matches.append((tm, exact[0]))
+            player_id = exact[0]
+            if _team_is_compatible(tm.team, teams_by_player_id.get(player_id, set())):
+                exact_matches.append((tm, player_id))
+            # nombre unico pero equipo incompatible -> casi seguro una persona distinta
+            # con el mismo nombre; se descarta del todo, no se reintenta por substring
         else:
             substring_candidates.append((tm, tm_norm))
 
@@ -215,6 +264,7 @@ def build_market_values() -> tuple[int, int]:
             for pid, norm in normalized_players
             if pid not in claimed_player_ids and (norm in tm_norm or tm_norm in norm)
         ]
+        candidates = [pid for pid in candidates if _team_is_compatible(tm.team, teams_by_player_id.get(pid, set()))]
         if len(candidates) != 1:
             continue
         player_id = candidates[0]

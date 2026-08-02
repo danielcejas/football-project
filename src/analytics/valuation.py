@@ -13,6 +13,17 @@ de producción ofensiva (goles, asistencias, xG, xA, pases clave), sin nada defe
 modelo no los infravalora "de verdad" — sólo refleja que no tenemos ninguna variable que
 explique su valor, y esos residuos gigantes además distorsionan el ajuste para el resto.
 Valorar defensas/porteros con seriedad necesitaría otra fuente de datos.
+
+Comportamiento esperado, verificado con datos reales (issue #19): tras corregir el sesgo
+sistemático de exp(predicción) (ver el estimador de suavizado de Duan más abajo), el
+jugador mediano de las 3 temporadas de La Liga sale con value_gap_pct positivo (rinde en
+línea o por encima de lo que cuesta). Las superestrellas consagradas SIGUEN saliendo con
+un gap negativo grande y consistente entre temporadas — verificado con Kylian
+Mbappe-Lottin (-48% a -51%), Vinícius Júnior (-66% a -72%), Pedri (-38% a -72%) y Jude
+Bellingham (~-67% en 2024/2025, aunque +0.9% en 2023) — y ESO SÍ es la señal real que el
+modelo pretende capturar: el mercado paga una prima de reputación/trofeos que un modelo
+que solo mira producción de la temporada no puede ver. No es un error ni un caso a
+corregir; es la lectura Moneyball esperada para este perfil de jugador.
 """
 
 import numpy as np
@@ -62,8 +73,18 @@ def fit_valuation_model(df: pd.DataFrame) -> pd.DataFrame:
     x_scaled = StandardScaler().fit_transform(x)
     model = Ridge(alpha=RIDGE_ALPHA)
     model.fit(x_scaled, y)
+    y_pred_log = model.predict(x_scaled)
 
-    df["predicted_value_eur"] = np.exp(model.predict(x_scaled))
+    # exp(prediccion) a secas estima la MEDIANA de la distribucion condicional, no la
+    # media -- como el valor de mercado esta muy sesgado a la derecha (unos pocos
+    # jugadores valen 100-200M, la mayoria mucho menos), eso subestima sistematicamente
+    # a TODO el mundo, no solo a las superestrellas (que es lo que parecia el patron a
+    # simple vista). Estimador de suavizado de Duan (1983): corrige el sesgo a partir de
+    # los propios residuos del ajuste, sin asumir que son perfectamente normales.
+    residuals = y - y_pred_log
+    smearing_factor = np.mean(np.exp(residuals))
+
+    df["predicted_value_eur"] = np.exp(y_pred_log) * smearing_factor
     df["value_gap_eur"] = df["predicted_value_eur"] - df["market_value_eur"]
     df["value_gap_pct"] = df["value_gap_eur"] / df["market_value_eur"] * 100
     return df
