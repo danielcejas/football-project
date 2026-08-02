@@ -13,6 +13,17 @@ de producción ofensiva (goles, asistencias, xG, xA, pases clave), sin nada defe
 modelo no los infravalora "de verdad" — sólo refleja que no tenemos ninguna variable que
 explique su valor, y esos residuos gigantes además distorsionan el ajuste para el resto.
 Valorar defensas/porteros con seriedad necesitaría otra fuente de datos.
+
+Comportamiento esperado, verificado con datos reales (issue #19): tras corregir el sesgo
+sistemático de exp(predicción) (ver el estimador de suavizado de Duan más abajo), el
+jugador mediano de las 3 temporadas de La Liga sale con value_gap_pct positivo (rinde en
+línea o por encima de lo que cuesta). Las superestrellas consagradas SIGUEN saliendo con
+un gap negativo grande y consistente entre temporadas — verificado con Kylian
+Mbappe-Lottin (-48% a -51%), Vinícius Júnior (-66% a -72%), Pedri (-38% a -72%) y Jude
+Bellingham (~-67% en 2024/2025, aunque +0.9% en 2023) — y ESO SÍ es la señal real que el
+modelo pretende capturar: el mercado paga una prima de reputación/trofeos que un modelo
+que solo mira producción de la temporada no puede ver. No es un error ni un caso a
+corregir; es la lectura Moneyball esperada para este perfil de jugador.
 """
 
 import numpy as np

@@ -264,8 +264,12 @@ st.caption(
     "asistencias, xG, xA, pases clave, edad y posición de esta temporada. Azul = el modelo "
     "cree que debería valer más de lo que vale (posible ganga); rojo = el mercado paga más "
     "de lo que el rendimiento de esta temporada sugiere. Limitado a F/M porque Understat no "
-    "da métricas defensivas, y no ve reputación, trayectoria ni potencial — que las grandes "
-    "estrellas salgan en rojo es esperable, no un error del modelo."
+    "da métricas defensivas, y no ve reputación, trayectoria ni potencial: el jugador típico "
+    "sale en azul (rinde en línea o por encima de lo que cuesta), pero superestrellas "
+    "consagradas (ej. Mbappé, Vinícius Júnior, Pedri) salen sistemáticamente en rojo con un "
+    "gap grande en las 3 temporadas — es la prima de reputación/trofeos que paga el mercado "
+    "y que este modelo, al mirar solo producción de la temporada, no puede ver. Es el "
+    "comportamiento esperado, no un error."
 )
 valuation_df = load_player_valuation()
 st.altair_chart(valuation_chart(valuation_df), use_container_width=True)
