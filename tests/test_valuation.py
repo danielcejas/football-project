@@ -41,3 +41,28 @@ def test_fit_valuation_model_output_columns():
     for col in ("predicted_value_eur", "value_gap_eur", "value_gap_pct"):
         assert col in df.columns
     assert df["predicted_value_eur"].gt(0).all()
+
+
+def test_smearing_correction_raises_predictions_above_naive_exponential():
+    # exp(prediccion) a secas subestima sistematicamente (estima la mediana, no la
+    # media, de una distribucion sesgada a la derecha) -- la correccion de Duan debe
+    # dejar las predicciones por encima de esa version sin corregir.
+    import numpy as np
+    from sklearn.linear_model import Ridge
+    from sklearn.preprocessing import StandardScaler
+
+    from src.analytics.valuation import PER90_STAT_COLS, RIDGE_ALPHA, VALUATION_POSITIONS, add_per90_features
+
+    raw = _synthetic_players()
+    corrected = fit_valuation_model(raw.copy())
+
+    prepared = add_per90_features(raw)
+    prepared = prepared[prepared["position_bucket"].isin(VALUATION_POSITIONS)].reset_index(drop=True)
+    feature_cols = [f"{c}_p90" for c in PER90_STAT_COLS] + ["age"]
+    x = pd.concat([prepared[feature_cols], pd.get_dummies(prepared["position_bucket"], prefix="pos")], axis=1)
+    y = np.log(prepared["market_value_eur"])
+    x_scaled = StandardScaler().fit_transform(x)
+    model = Ridge(alpha=RIDGE_ALPHA).fit(x_scaled, y)
+    naive_predicted = np.exp(model.predict(x_scaled))
+
+    assert corrected["predicted_value_eur"].sum() > naive_predicted.sum()

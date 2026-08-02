@@ -62,8 +62,18 @@ def fit_valuation_model(df: pd.DataFrame) -> pd.DataFrame:
     x_scaled = StandardScaler().fit_transform(x)
     model = Ridge(alpha=RIDGE_ALPHA)
     model.fit(x_scaled, y)
+    y_pred_log = model.predict(x_scaled)
 
-    df["predicted_value_eur"] = np.exp(model.predict(x_scaled))
+    # exp(prediccion) a secas estima la MEDIANA de la distribucion condicional, no la
+    # media -- como el valor de mercado esta muy sesgado a la derecha (unos pocos
+    # jugadores valen 100-200M, la mayoria mucho menos), eso subestima sistematicamente
+    # a TODO el mundo, no solo a las superestrellas (que es lo que parecia el patron a
+    # simple vista). Estimador de suavizado de Duan (1983): corrige el sesgo a partir de
+    # los propios residuos del ajuste, sin asumir que son perfectamente normales.
+    residuals = y - y_pred_log
+    smearing_factor = np.mean(np.exp(residuals))
+
+    df["predicted_value_eur"] = np.exp(y_pred_log) * smearing_factor
     df["value_gap_eur"] = df["predicted_value_eur"] - df["market_value_eur"]
     df["value_gap_pct"] = df["value_gap_eur"] / df["market_value_eur"] * 100
     return df
