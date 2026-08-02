@@ -1,5 +1,16 @@
 """Ranking Elo de clubes y jugadores. Funciones puras, sin dependencia de la base de datos,
-para poder testear la fórmula con datos sintéticos antes de aplicarla a datos reales."""
+para poder testear la fórmula con datos sintéticos antes de aplicarla a datos reales.
+
+Auditoría de los parámetros del Elo de clubes (issue #20), con datos reales de las 3
+temporadas de La Liga: con K=20, home_advantage=100 y el multiplicador de diferencia de
+goles del World Football Elo, el orden final de las 3 temporadas coincide con la realidad
+(Real Madrid campeón 2023/24, Barcelona campeón 2024/25 y 2025/26 -- ambos en el puesto 1
+del ranking Elo al final de su temporada), y los equipos descendidos esa temporada
+(Cádiz/Almería/Granada en 2023/24, Las Palmas/Valladolid en 2024/25) terminan siempre
+entre los últimos. El rango de ratings de una temporada completa es de ~500 puntos
+(bottom ~1280-1400, top ~1720-1780), un spread razonable para 20 equipos. No se ha
+encontrado ninguna anomalía que justifique tocar estas constantes.
+"""
 
 DEFAULT_K = 20.0
 DEFAULT_HOME_ADVANTAGE = 100.0
