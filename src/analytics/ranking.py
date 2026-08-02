@@ -89,16 +89,23 @@ def player_elo_update(
 ) -> tuple[float, float]:
     """Devuelve (rating_after, delta).
 
-    Dos componentes:
+    Dos componentes, AMBOS ponderados por minutos jugados:
     - team_component: recompensa formar parte de un resultado mejor de lo esperado
-      (mismos team_actual/team_expected que en club_elo_update), ponderado por minutos
-      jugados para que un suplente que entra 10' no se mueva igual que un titular.
+      (mismos team_actual/team_expected que en club_elo_update).
     - performance_component: recompensa rendir por encima de las métricas subyacentes
-      (goles+asistencias por encima de npxG+xA), no se pondera por minutos porque ya es
-      un total del partido.
+      (goles+asistencias por encima de npxG+xA).
+
+    Auditoría (issue #21): antes performance_component NO se ponderaba por minutos, con
+    el argumento de que ya es un total del partido. Con datos reales esto producía
+    deltas desproporcionados para suplentes con muestras minúsculas -- ej. un jugador que
+    entra 8-11 minutos y anota gol+asistencia (sobre un npxG+xA de apenas ~0.1-0.2)
+    recibía un delta de +15, equivalente al de una actuación completa de 90' realmente
+    sobresaliente. Un gol suelto en una muestra tan pequeña es sobre todo ruido, no señal
+    fiable de calidad -- se pondera igual que team_component para que un cameo corto no
+    mueva el rating tanto como un partido completo.
     """
     minutes_weight = min(minutes / 90, 1.0) if minutes else 0.0
     team_component = k * minutes_weight * (team_actual - team_expected)
-    performance_component = bonus_weight * (goal_contribution - expected_goal_contribution)
+    performance_component = bonus_weight * minutes_weight * (goal_contribution - expected_goal_contribution)
     delta = team_component + performance_component
     return rating + delta, delta

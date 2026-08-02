@@ -32,7 +32,7 @@ st.set_page_config(page_title="Football Analytics — La Liga", layout="centered
 
 
 @st.cache_data(ttl=600)
-def load_club_seasons() -> list[str]:
+def load_available_seasons() -> list[str]:
     query = "SELECT DISTINCT season FROM core.matches WHERE competition = 'La_liga' ORDER BY season DESC"
     return pd.read_sql(query, get_engine())["season"].tolist()
 
@@ -59,15 +59,26 @@ def load_club_rankings(season: str) -> pd.DataFrame:
 
 
 @st.cache_data(ttl=600)
-def load_player_rankings(limit: int = 20) -> pd.DataFrame:
-    query = f"""
-        SELECT p.canonical_name AS player, pr.elo_rating, pr.match_date
-        FROM marts.player_rankings pr
-        JOIN core.players p ON p.id = pr.player_id
-        ORDER BY pr.elo_rating DESC
-        LIMIT {limit}
+def load_player_rankings(season: str, limit: int = 20) -> pd.DataFrame:
+    """Elo de cada jugador al final (o al momento mas reciente disponible) de la
+    temporada elegida -- antes se tomaba el ultimo partido de cada jugador en TODA su
+    historia, mezclando jugadores que ya no juegan en La Liga (retirados, transferidos)
+    con la temporada vigente (issue #21)."""
+    query = """
+        WITH latest AS (
+            SELECT DISTINCT ON (peh.player_id) peh.player_id, peh.elo_after AS elo_rating, peh.match_date
+            FROM marts.player_elo_history peh
+            JOIN core.matches m ON m.id = peh.match_id
+            WHERE m.competition = 'La_liga' AND m.season = :season
+            ORDER BY peh.player_id, peh.match_date DESC, peh.id DESC
+        )
+        SELECT p.canonical_name AS player, latest.elo_rating, latest.match_date
+        FROM latest
+        JOIN core.players p ON p.id = latest.player_id
+        ORDER BY latest.elo_rating DESC
+        LIMIT :limit
     """
-    return pd.read_sql(query, get_engine())
+    return pd.read_sql(text(query), get_engine(), params={"season": season, "limit": limit})
 
 
 @st.cache_data(ttl=600)
@@ -259,7 +270,7 @@ st.caption(
     "el rival y, para jugadores, su rendimiento individual. Datos: Understat + Transfermarkt."
 )
 
-player_df = load_player_rankings()
+available_seasons = load_available_seasons()
 
 st.header("Ranking de clubes")
 st.caption(
@@ -267,7 +278,7 @@ st.caption(
     "no siempre son 20 equipos: en una temporada histórica solo aparecen los que "
     "compitieron esa campaña."
 )
-club_season = st.selectbox("Temporada", load_club_seasons(), format_func=season_label, key="club_season")
+club_season = st.selectbox("Temporada", available_seasons, format_func=season_label, key="club_season")
 club_df = load_club_rankings(club_season)
 st.altair_chart(ranking_chart(club_df, "team", BLUE, height=24 * len(club_df)), use_container_width=True)
 with st.expander("Ver tabla"):
@@ -278,6 +289,11 @@ with st.expander("Ver tabla"):
     )
 
 st.header("Ranking de jugadores (top 20)")
+st.caption(
+    "Elo de cada jugador al final (o al momento más reciente) de la temporada elegida."
+)
+player_season = st.selectbox("Temporada", available_seasons, format_func=season_label, key="player_season")
+player_df = load_player_rankings(player_season)
 st.altair_chart(ranking_chart(player_df, "player", AQUA, height=24 * len(player_df)), use_container_width=True)
 with st.expander("Ver tabla"):
     st.dataframe(
