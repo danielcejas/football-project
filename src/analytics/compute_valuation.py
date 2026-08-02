@@ -15,17 +15,37 @@ MIN_MINUTES = 450  # ~5 partidos completos: evita que muestras muy pequeñas met
 
 
 def load_features(competition: str, season: str) -> pd.DataFrame:
+    """El valor de mercado y la edad se toman "a fecha de" ESTA temporada, no el snapshot
+    más reciente de todos -- si no, una temporada histórica se valoraría con el valor de
+    mercado o la edad ACTUAL del jugador en vez de la de esa época (bug real:
+    Bellingham/Lewandowski salían con el mismo valor de mercado en sus 3 temporadas).
+
+    El corte se calcula a partir de datos reales (fecha del primer partido de la
+    temporada SIGUIENTE), no de la fecha de "hoy" -- una versión anterior de este fix
+    usaba _valued_at_for_season(season), pero esa función depende de "hoy" en el momento
+    de EJECUTAR el script, no de cuando se scrapeó cada temporada, así que dejaba de
+    funcionar en cuanto pasaba la fecha de cierre nominal de la temporada vigente. Si no
+    existe una temporada siguiente ya cargada (es la vigente), no se aplica corte y se
+    toma el snapshot más reciente disponible, como antes.
+    """
+    next_season = str(int(season) + 1)
     query = """
-        WITH latest_value AS (
-            SELECT DISTINCT ON (player_id) player_id, market_value_eur
-            FROM core.market_values
-            ORDER BY player_id, valued_at DESC
+        WITH next_season_start AS (
+            SELECT MIN(match_date) AS start_date
+            FROM core.matches
+            WHERE competition = :competition AND season = :next_season
+        ),
+        latest_value AS (
+            SELECT DISTINCT ON (mv.player_id) mv.player_id, mv.market_value_eur
+            FROM core.market_values mv, next_season_start nss
+            WHERE nss.start_date IS NULL OR mv.valued_at < nss.start_date
+            ORDER BY mv.player_id, mv.valued_at DESC
         ),
         latest_age AS (
-            SELECT DISTINCT ON (tm_player_id) tm_player_id, age
-            FROM staging.transfermarkt_players
-            WHERE age IS NOT NULL
-            ORDER BY tm_player_id, valued_at DESC
+            SELECT DISTINCT ON (tp.tm_player_id) tp.tm_player_id, tp.age
+            FROM staging.transfermarkt_players tp, next_season_start nss
+            WHERE tp.age IS NOT NULL AND (nss.start_date IS NULL OR tp.valued_at < nss.start_date)
+            ORDER BY tp.tm_player_id, tp.valued_at DESC
         ),
         season_stats AS (
             SELECT
@@ -53,7 +73,14 @@ def load_features(competition: str, season: str) -> pd.DataFrame:
         WHERE ss.minutes >= :min_minutes
     """
     return pd.read_sql(
-        text(query), get_engine(), params={"competition": competition, "season": season, "min_minutes": MIN_MINUTES}
+        text(query),
+        get_engine(),
+        params={
+            "competition": competition,
+            "season": season,
+            "next_season": next_season,
+            "min_minutes": MIN_MINUTES,
+        },
     )
 
 
